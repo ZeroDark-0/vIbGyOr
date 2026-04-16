@@ -1,7 +1,7 @@
 {
 	"name": "obsidian_theme_plugin",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "Customize your Obsidian notes with unique colors and patterns.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
