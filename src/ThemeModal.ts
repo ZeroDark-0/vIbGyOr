@@ -1,4 +1,4 @@
-import {App, Modal, Setting, Notice, TFile, ColorComponent} from "obsidian";
+import {App, Modal, Setting, Notice, TFile, ColorComponent, DropdownComponent} from "obsidian";
 import NoteThemerPlugin from "./main";
 
 export class ThemeModal extends Modal {
@@ -107,7 +107,7 @@ export class ThemeModal extends Modal {
         let cLink: ColorComponent = null!;
         let cAcc: ColorComponent = null!;
         let cPen: ColorComponent = null!;
-        let patDropdown: any = null;
+        let patDropdown: DropdownComponent | null = null;
 
         new Setting(containerEl)
             .setName("Theme preset")
@@ -169,7 +169,7 @@ export class ThemeModal extends Modal {
                 }));
     }
 
-    private updatePreview(value: string, pgSetting: Setting | null, cPage: ColorComponent, cLink: ColorComponent, cAcc: ColorComponent, cPen: ColorComponent, patDropdown: any) {
+    private updatePreview(value: string, pgSetting: Setting | null, cPage: ColorComponent, cLink: ColorComponent, cAcc: ColorComponent, cPen: ColorComponent, patDropdown: DropdownComponent | null) {
         if (value === "custom") {
             if (pgSetting) {
                 pgSetting.nameEl.innerText = "Custom theme colors";
