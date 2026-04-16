@@ -1,0 +1,11 @@
+{
+	"id": "obsidian_theme_plugin",
+	"name": "Obsidian Theme Plugin",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Customize your Obsidian notes with unique colors and patterns.",
+	"author": "User",
+	"authorUrl": "",
+	"fundingUrl": "",
+	"isDesktopOnly": false
+}
