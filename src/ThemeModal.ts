@@ -1,8 +1,8 @@
 import {App, Modal, Setting, Notice, TFile, ColorComponent, DropdownComponent} from "obsidian";
-import NoteThemerPlugin from "./main";
+import VibgyorPlugin from "./main";
 
 export class ThemeModal extends Modal {
-    plugin: NoteThemerPlugin;
+    plugin: VibgyorPlugin;
     noteTitle: string = "";
     selectedThemeId: string = "custom";
     customPageColor: string = "#ffffff";
@@ -13,7 +13,7 @@ export class ThemeModal extends Modal {
     selectedCategory: string = "all";
     isEditMode: boolean = false;
 
-    constructor(app: App, plugin: NoteThemerPlugin, isEditMode: boolean = false) {
+    constructor(app: App, plugin: VibgyorPlugin, isEditMode: boolean = false) {
         super(app);
         this.plugin = plugin;
         this.isEditMode = isEditMode;

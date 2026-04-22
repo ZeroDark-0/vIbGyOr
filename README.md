@@ -1,4 +1,4 @@
-# Obsidian Theme Plugin
+# v i b g y o r
 
 A customizable Obsidian plugin that enables per-note theming through frontmatter properties and global UI enhancements.
 
@@ -35,7 +35,7 @@ There are three ways to modify a note's appearance:
 
 ### 4. Creating Custom Palettes
 Make your favorite color combinations reusable!
-1. Open **Settings** > **Obsidian Theme Plugin**.
+1. Open **Settings** > **v i b g y o r**.
 2. Scroll to **Custom Palettes** and click **Add custom palette**.
 3. Customize the colors and name it.
 4. Your new palette will now appear in the theme selection dropdown whenever you create or edit a note.
@@ -64,7 +64,7 @@ page-pattern: "grid"     # Pattern type (none, lined, dotted, grid, etc.)
 
 ### Manual Installation
 1. Download the latest release (`main.js`, `manifest.json`, `styles.css`).
-2. Create a folder named `obsidian_theme_plugin` in your vault's `.obsidian/plugins/` directory.
+2. Create a folder named `vIbGyOr` in your vault's `.obsidian/plugins/` directory.
 3. Move the downloaded files into that folder.
 4. Reload Obsidian and enable the plugin in settings.
 

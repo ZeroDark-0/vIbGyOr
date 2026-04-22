@@ -1,5 +1,5 @@
 import {App, PluginSettingTab, Setting} from "obsidian";
-import NoteThemerPlugin from "./main";
+import VibgyorPlugin from "./main";
 
 export interface ThemeEntry {
     id: string;
@@ -14,22 +14,25 @@ export interface ThemeEntry {
     isPreset?: boolean;
 }
 
-export interface NoteThemerSettings {
+export interface VibgyorSettings {
     themes: ThemeEntry[];
 }
 
-export const DEFAULT_SETTINGS: NoteThemerSettings = {
+export const DEFAULT_SETTINGS: VibgyorSettings = {
     themes: [
+        { id: "default-dark", name: "Dark Mode Preset", category: "custom", pageColor: "#202020", linkColor: "#5588ff", accentColor: "#ff9900", penColor: "#ffffff", isPreset: true },
+        { id: "default-light", name: "Light Mode Preset", category: "custom", pageColor: "#ffffff", linkColor: "#3366cc", accentColor: "#ff9900", penColor: "#000000", isPreset: true },
         { id: "vampire-palette", name: "Vampire Palette", category: "normal", pageColor: "#1a1112", linkColor: "#d74241", accentColor: "#85161a", penColor: "#eeefef", isPreset: true },
-        { id: "default-light", name: "Light Mode Preset", category: "normal", pageColor: "#ffffff", linkColor: "#3366cc", accentColor: "#ff9900", penColor: "#000000", isPreset: true },
-        { id: "default-dark", name: "Dark Mode Preset", category: "normal", pageColor: "#202020", linkColor: "#5588ff", accentColor: "#ff9900", penColor: "#ffffff", isPreset: true }
+        { id: "sepia-palette", name: "Sepia Palette", category: "normal", pageColor: "#f4ecd8", linkColor: "#5c4331", accentColor: "#d97742", penColor: "#433422", isPreset: true },
+        { id: "nord-dark", name: "Nord Dark", category: "normal", pageColor: "#2e3440", linkColor: "#88c0d0", accentColor: "#5e81ac", penColor: "#eceff4", isPreset: true },
+        { id: "neon-noir", name: "Neon Noir", category: "normal", pageColor: "#000000", linkColor: "#00e5ff", accentColor: "#ffffff", penColor: "#cfffe2", isPreset: true }
     ]
 }
 
-export class NoteThemerSettingTab extends PluginSettingTab {
-    plugin: NoteThemerPlugin;
+export class VibgyorSettingTab extends PluginSettingTab {
+    plugin: VibgyorPlugin;
 
-    constructor(app: App, plugin: NoteThemerPlugin) {
+    constructor(app: App, plugin: VibgyorPlugin) {
         super(app, plugin);
         this.plugin = plugin;
     }
@@ -130,7 +133,7 @@ export class NoteThemerSettingTab extends PluginSettingTab {
 
     private renderThemeCard(parentEl: HTMLElement, theme: ThemeEntry, index: number): void {
         const themeDiv = parentEl.createDiv({cls: 'theme-card'});
-        const isPreset = theme.isPreset || ["vampire-palette", "default-light", "default-dark"].includes(theme.id);
+        const isPreset = theme.isPreset || ["default-dark", "default-light", "vampire-palette", "sepia-palette", "nord-dark", "neon-noir"].includes(theme.id);
 
         // Color preview strip at the top
         const previewStrip = themeDiv.createDiv({cls: 'theme-preview-strip'});

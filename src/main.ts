@@ -1,15 +1,15 @@
 import {Plugin, TFile, Notice, MarkdownView} from 'obsidian';
-import {DEFAULT_SETTINGS, NoteThemerSettings, NoteThemerSettingTab} from "./settings";
+import {DEFAULT_SETTINGS, VibgyorSettings, VibgyorSettingTab} from "./settings";
 import {ThemeModal} from "./ThemeModal";
 
-export default class NoteThemerPlugin extends Plugin {
-	settings: NoteThemerSettings;
+export default class VibgyorPlugin extends Plugin {
+	settings: VibgyorSettings;
 
 	async onload() {
 		await this.loadSettings();
 
 		// Add our new settings tab
-		this.addSettingTab(new NoteThemerSettingTab(this.app, this));
+		this.addSettingTab(new VibgyorSettingTab(this.app, this));
 
 		// Add the Ribbon icon that triggers the Creation modal
 		this.addRibbonIcon('paintbrush', 'Create note with theme', (evt: MouseEvent) => {
@@ -136,22 +136,14 @@ export default class NoteThemerPlugin extends Plugin {
     }
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData()) as NoteThemerSettings;
+		const loadedData = await this.loadData();
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, loadedData) as VibgyorSettings;
 
-		// Ensure preset themes are always up-to-date with defaults
-		for (const preset of DEFAULT_SETTINGS.themes) {
-			if (!preset.isPreset) continue;
-			const idx = this.settings.themes.findIndex(t => t.id === preset.id);
-			if (idx === -1) {
-				this.settings.themes.push(preset);
-			} else {
-				this.settings.themes[idx] = preset;
-			}
-		}
+		// Extract custom themes from loaded settings (ignore old presets from data.json)
+		const customThemes = (this.settings.themes || []).filter(t => !t.isPreset);
 
-		// Remove any preset themes from saved settings that no longer exist in defaults (e.g. Brooklyn)
-		const defaultPresetIds = new Set(DEFAULT_SETTINGS.themes.map(t => t.id));
-		this.settings.themes = this.settings.themes.filter(t => !t.isPreset || defaultPresetIds.has(t.id));
+		// Guarantee that presets match the exact order and content of DEFAULT_SETTINGS, followed by custom themes
+		this.settings.themes = [...DEFAULT_SETTINGS.themes, ...customThemes];
 	}
 
 	async saveSettings() {
