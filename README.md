@@ -16,8 +16,8 @@ The plugin provides two main entry points in your left ribbon:
 
 | Icon | Name | Purpose |
 | :--- | :--- | :--- |
-| ![paintbrush](https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/brush.svg) | **Create Themed Note** | Opens a modal to name a new note and pick its initial theme/pattern. |
-| ![palette](https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/palette.svg) | **Edit Active Theme** | Modifies the theme and pattern of the note you are currently viewing. |
+| ![paintbrush](assets/icon-brush.svg) | **Create Themed Note** | Opens a modal to name a new note and pick its initial theme/pattern. |
+| ![palette](assets/icon-palette.svg) | **Edit Active Theme** | Modifies the theme and pattern of the note you are currently viewing. |
 
 ### 2. How to Create a Themed Note
 1. Click the **Paintbrush** icon in the ribbon.
@@ -58,7 +58,7 @@ page-pattern: "grid"     # Pattern type (none, lined, dotted, grid, etc.)
 ```
 
 ### Supported Patterns
-- `lined`, `dotted`, `grid`, `cornell`, `blueprint`, `woven`, `hexagonal`, `cosmos`
+- `lined`, `dotted`, `grid`, `cornell`, `blueprint`, `woven`, `hexagonal`, `cosmos`, `stars`, `halftone`, `maze`, `chevron`, `glitch`
 
 ## Installation
 
