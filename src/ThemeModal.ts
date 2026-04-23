@@ -42,7 +42,7 @@ export class ThemeModal extends Modal {
                 
                 // Preload current frontmatter values if they exist
                 const cache = this.app.metadataCache.getFileCache(activeFile);
-                const frontmatter: Record<string, string> | undefined = cache?.frontmatter;
+                const frontmatter: any = cache?.frontmatter;
                 if (frontmatter) {
                     if (frontmatter['page-color']) this.customPageColor = frontmatter['page-color'];
                     if (frontmatter['link-color']) this.customLinkColor = frontmatter['link-color'];
@@ -151,7 +151,8 @@ export class ThemeModal extends Modal {
                         "blueprint": "Blueprint",
                         "woven": "Woven",
                         "hexagonal": "Hexagonal",
-                        "cosmos": "Space / Cosmos (Icon)"
+                        "cosmos": "Space / Cosmos (Icon)",
+                        "stars": "Starfield"
                     }).setValue(this.customPagePattern).onChange(v => this.customPagePattern = v);
                 });
 
@@ -221,7 +222,7 @@ export class ThemeModal extends Modal {
         if (this.isEditMode) {
             const activeFile = this.app.workspace.getActiveFile();
             if (activeFile) {
-                await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: Record<string, string>) => {
+                await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: any) => {
                     frontmatter['page-color'] = pg;
                     frontmatter['link-color'] = lnk;
                     frontmatter['accent-color'] = acc;

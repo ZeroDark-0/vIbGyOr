@@ -85,14 +85,14 @@ export default class VibgyorPlugin extends Plugin {
         // Wait a brief moment to ensure the DOM is ready for styles
         setTimeout(() => {
             const cache = this.app.metadataCache.getFileCache(file);
-            const frontmatter: Record<string, string> | undefined = cache?.frontmatter;
+            const frontmatter: Record<string, any> = cache?.frontmatter || {};
             
             this.app.workspace.iterateAllLeaves(leaf => {
                 const view = leaf.view as MarkdownView;
                 // Target specifically the container showing THIS file
                 if (view.file && view.file.path === file.path && view.containerEl) {
                     // Clean up potential old pattern classes
-                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-checkerboard');
+                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-stars', 'pattern-checkerboard');
 
                     if (frontmatter && frontmatter['page-color']) {
                         view.containerEl.style.setProperty('--note-page-color', frontmatter['page-color']);
@@ -108,7 +108,7 @@ export default class VibgyorPlugin extends Plugin {
                         
                         // Handle Page Pattern
                         const pattern = frontmatter['page-pattern'];
-                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'checkerboard'].includes(pattern)) {
+                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'stars', 'checkerboard'].includes(pattern)) {
                             view.containerEl.classList.add(`pattern-${pattern}`);
                             
                             // Dynamic SVG Injection for Cosmos
@@ -117,10 +117,48 @@ export default class VibgyorPlugin extends Plugin {
                                 const penHex = penColor.toString().replace('#', '%23');
                                 const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><circle cx='20' cy='20' r='2' fill='${penHex}' fill-opacity='0.2'/><circle cx='80' cy='40' r='3' fill='${penHex}' fill-opacity='0.15'/><circle cx='50' cy='80' r='1.5' fill='${penHex}' fill-opacity='0.3'/><path d='M70 15 L72 10 L74 15 L79 17 L74 19 L72 24 L70 19 L65 17 Z' fill='${penHex}' fill-opacity='0.25'/><circle cx='10' cy='60' r='1.5' fill='${penHex}' fill-opacity='0.25'/></svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
-                            } else {
+                            }
+                            // Dynamic SVG Injection for Stars
+                            else if (pattern === 'stars') {
+                                const penColor = frontmatter['pen-color'] || '#ffffff';
+                                const c = penColor.toString().replace('#', '%23');
+                                // 4-pointed star path helper
+                                const sp = (cx: number, cy: number, s: number, op: number) => {
+                                    const i = s * 0.25;
+                                    return `<path d='M${cx} ${cy-s} L${cx+i} ${cy-i} L${cx+s} ${cy} L${cx+i} ${cy+i} L${cx} ${cy+s} L${cx-i} ${cy+i} L${cx-s} ${cy} L${cx-i} ${cy-i} Z' fill='${c}' fill-opacity='${op}'/>`;
+                                };
+                                const dp = (cx: number, cy: number, r: number, op: number) =>
+                                    `<circle cx='${cx}' cy='${cy}' r='${r}' fill='${c}' fill-opacity='${op}'/>`;
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'>` +
+                                    // Large stars
+                                    sp(45,40,15,0.2) + sp(250,35,13,0.18) + sp(150,100,18,0.22) +
+                                    sp(40,170,14,0.2) + sp(270,160,16,0.15) + sp(100,250,15,0.2) +
+                                    sp(230,250,12,0.18) +
+                                    // Medium stars
+                                    sp(145,35,8,0.25) + sp(200,70,7,0.2) + sp(80,100,9,0.22) +
+                                    sp(260,100,7,0.2) + sp(170,170,10,0.18) + sp(55,260,8,0.25) +
+                                    sp(160,230,7,0.2) + sp(290,240,6,0.22) +
+                                    // Small dots
+                                    dp(110,55,2,0.2) + dp(210,25,1.5,0.25) + dp(30,85,1,0.3) +
+                                    dp(295,60,1.5,0.2) + dp(185,135,2,0.15) + dp(20,135,1.5,0.25) +
+                                    dp(120,150,1,0.3) + dp(225,130,2,0.2) + dp(70,200,1.5,0.25) +
+                                    dp(130,190,1,0.2) + dp(215,195,1.5,0.25) + dp(280,200,1,0.3) +
+                                    dp(30,290,2,0.2) + dp(190,280,1.5,0.25) + dp(270,285,1,0.2) +
+                                    dp(145,280,1,0.3) +
+                                    `</svg>`;
+                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
+                            }
+                            else {
                                 view.containerEl.style.removeProperty('--dynamic-svg');
                             }
                         }
+
+                        // Auto-recolor images: generate an SVG filter that
+                        // floods the pen color and composites with SourceAlpha,
+                        // so only opaque pixels (ink) get the pen color.
+                        const penColor = (frontmatter['pen-color'] || '#000000').toString().replace('#', '%23');
+                        const svgFilter = `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='recolor'><feFlood flood-color='${penColor}' result='flood'/><feComposite in='flood' in2='SourceAlpha' operator='in'/></filter></svg>#recolor")`;
+                        view.containerEl.style.setProperty('--img-recolor-filter', svgFilter);
                     } else {
                         // If no theme properties, revert to default Obsidian behavior
                         view.containerEl.style.removeProperty('--note-page-color');
@@ -128,6 +166,7 @@ export default class VibgyorPlugin extends Plugin {
                         view.containerEl.style.removeProperty('--note-link-color');
                         view.containerEl.style.removeProperty('--note-accent-color');
                         view.containerEl.style.removeProperty('--note-grid-color');
+                        view.containerEl.style.removeProperty('--img-recolor-filter');
                         view.containerEl.classList.remove('custom-note-theme');
                     }
                 }

@@ -122,9 +122,11 @@
     background-attachment: local;
 }
 
-/* --- Cosmos Pattern --- */
+/* --- Cosmos & Stars Patterns (dynamic SVG) --- */
 .custom-note-theme.pattern-cosmos .markdown-reading-view,
-.custom-note-theme.pattern-cosmos .cm-scroller {
+.custom-note-theme.pattern-cosmos .cm-scroller,
+.custom-note-theme.pattern-stars .markdown-reading-view,
+.custom-note-theme.pattern-stars .cm-scroller {
     background-image: var(--dynamic-svg) !important;
     background-repeat: repeat;
     background-attachment: local;
@@ -255,4 +257,16 @@
     margin: 0;
     font-size: 0.85em;
     color: var(--text-faint);
+}
+
+/* ══════════════════════════════════════════
+   Image Recoloring — Automatic Pen Color
+   ══════════════════════════════════════════ */
+
+/* Recolor transparent-background images (e.g. handwritten note PNGs)
+   to match the pen color using an inline SVG feFlood+feComposite filter.
+   Only opaque pixels (ink/text) are recolored; transparent areas stay clear. */
+.custom-note-theme img {
+    filter: var(--img-recolor-filter) !important;
+    transition: filter 0.3s ease;
 }
