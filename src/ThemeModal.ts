@@ -49,6 +49,19 @@ export class ThemeModal extends Modal {
                     if (frontmatter['accent-color']) this.customAccentColor = frontmatter['accent-color'];
                     if (frontmatter['pen-color']) this.customPenColor = frontmatter['pen-color'];
                     if (frontmatter['page-pattern']) this.customPagePattern = frontmatter['page-pattern'];
+                    if (frontmatter['theme-id']) {
+                        this.selectedThemeId = frontmatter['theme-id'];
+                    } else {
+                        // Fallback: Try to identify the theme by matching colors/pattern
+                        const matchingTheme = this.plugin.settings.themes.find(t => 
+                            t.pageColor === this.customPageColor &&
+                            t.penColor === this.customPenColor &&
+                            t.linkColor === this.customLinkColor &&
+                            t.accentColor === this.customAccentColor &&
+                            (t.pagePattern || "none") === this.customPagePattern
+                        );
+                        if (matchingTheme) this.selectedThemeId = matchingTheme.id;
+                    }
                 }
             } else {
                 contentEl.createEl("p", {text: `No active note open to edit.`});
@@ -228,6 +241,7 @@ export class ThemeModal extends Modal {
                     frontmatter['accent-color'] = acc;
                     frontmatter['pen-color'] = pen;
                     frontmatter['page-pattern'] = pat;
+                    frontmatter['theme-id'] = this.selectedThemeId;
                     if (gridCol) {
                         frontmatter['grid-color'] = gridCol;
                     } else {
@@ -244,7 +258,8 @@ export class ThemeModal extends Modal {
             }
             const fileName = `${this.noteTitle}.md`;
             const gridLine = gridCol ? `\ngrid-color: "${gridCol}"` : '';
-            const fileContent = `---\npage-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\npage-pattern: "${pat}"${gridLine}\n---\n\n`;
+            const themeIdLine = `\ntheme-id: "${this.selectedThemeId}"`;
+            const fileContent = `---\npage-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\npage-pattern: "${pat}"${gridLine}${themeIdLine}\n---\n\n`;
 
             try {
                 const file = await this.app.vault.create(fileName, fileContent);
