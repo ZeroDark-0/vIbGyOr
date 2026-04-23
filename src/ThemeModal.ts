@@ -222,9 +222,11 @@ export class ThemeModal extends Modal {
         let pat = this.customPagePattern;
         let gridCol = "";
 
+        let themeName = "Custom Colors";
         if (this.selectedThemeId !== "custom") {
             const theme = this.plugin.settings.themes.find(t => t.id === this.selectedThemeId);
             if (theme) {
+                themeName = theme.name;
                 pg = theme.pageColor; lnk = theme.linkColor;
                 acc = theme.accentColor; pen = theme.penColor;
                 if (theme.pagePattern) pat = theme.pagePattern;
@@ -242,6 +244,7 @@ export class ThemeModal extends Modal {
                     frontmatter['pen-color'] = pen;
                     frontmatter['page-pattern'] = pat;
                     frontmatter['theme-id'] = this.selectedThemeId;
+                    frontmatter['theme-name'] = themeName;
                     if (gridCol) {
                         frontmatter['grid-color'] = gridCol;
                     } else {
@@ -259,7 +262,8 @@ export class ThemeModal extends Modal {
             const fileName = `${this.noteTitle}.md`;
             const gridLine = gridCol ? `\ngrid-color: "${gridCol}"` : '';
             const themeIdLine = `\ntheme-id: "${this.selectedThemeId}"`;
-            const fileContent = `---\npage-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\npage-pattern: "${pat}"${gridLine}${themeIdLine}\n---\n\n`;
+            const themeNameLine = `\ntheme-name: "${themeName}"`;
+            const fileContent = `---\npage-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\npage-pattern: "${pat}"${gridLine}${themeIdLine}${themeNameLine}\n---\n\n`;
 
             try {
                 const file = await this.app.vault.create(fileName, fileContent);
