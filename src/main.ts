@@ -92,35 +92,59 @@ export default class VibgyorPlugin extends Plugin {
                 // Target specifically the container showing THIS file
                 if (view.file && view.file.path === file.path && view.containerEl) {
                     // Clean up potential old pattern classes
-                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-stars', 'pattern-checkerboard');
+                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-stars', 'pattern-halftone', 'pattern-maze', 'pattern-chevron', 'pattern-glitch', 'pattern-checkerboard');
 
-                    if (frontmatter && frontmatter['page-color']) {
-                        view.containerEl.style.setProperty('--note-page-color', frontmatter['page-color']);
-                        view.containerEl.style.setProperty('--note-pen-color', frontmatter['pen-color'] || 'inherit');
-                        view.containerEl.style.setProperty('--note-link-color', frontmatter['link-color'] || 'var(--text-a)');
-                        view.containerEl.style.setProperty('--note-accent-color', frontmatter['accent-color'] || 'var(--text-accent)');
-                        if (frontmatter['grid-color']) {
-                            view.containerEl.style.setProperty('--note-grid-color', frontmatter['grid-color']);
+                    let pg = frontmatter['page-color'];
+                    let pen = frontmatter['pen-color'];
+                    let lnk = frontmatter['link-color'];
+                    let acc = frontmatter['accent-color'];
+                    let pat = frontmatter['page-pattern'];
+                    let gridCol = frontmatter['grid-color'];
+
+                    const themeId = frontmatter['theme-id'];
+                    const themeName = frontmatter['theme-name'];
+                    if (themeId || themeName) {
+                        const theme = this.settings.themes.find(t => 
+                            (themeId && themeId !== "custom" && t.id === themeId) ||
+                            (themeName && themeName !== "Custom Colors" && t.name === themeName)
+                        );
+                        if (theme) {
+                            pg = pg || theme.pageColor;
+                            pen = pen || theme.penColor;
+                            lnk = lnk || theme.linkColor;
+                            acc = acc || theme.accentColor;
+                            pat = pat || theme.pagePattern;
+                            gridCol = gridCol || theme.gridColor;
+                        }
+                    }
+
+                    if (pg) {
+                        view.containerEl.style.setProperty('--note-page-color', pg);
+                        view.containerEl.style.setProperty('--note-pen-color', pen || 'inherit');
+                        view.containerEl.style.setProperty('--note-link-color', lnk || 'var(--text-a)');
+                        view.containerEl.style.setProperty('--note-accent-color', acc || 'var(--text-accent)');
+                        if (gridCol) {
+                            view.containerEl.style.setProperty('--note-grid-color', gridCol);
                         } else {
                             view.containerEl.style.removeProperty('--note-grid-color');
                         }
                         view.containerEl.classList.add('custom-note-theme');
                         
                         // Handle Page Pattern
-                        const pattern = frontmatter['page-pattern'];
-                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'stars', 'checkerboard'].includes(pattern)) {
+                        const pattern = pat || frontmatter['page-pattern'];
+                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'stars', 'halftone', 'maze', 'chevron', 'glitch', 'checkerboard'].includes(pattern)) {
                             view.containerEl.classList.add(`pattern-${pattern}`);
                             
                             // Dynamic SVG Injection for Cosmos
                             if (pattern === 'cosmos') {
-                                const penColor = frontmatter['pen-color'] || '#ffffff';
+                                const penColor = pen || '#ffffff';
                                 const penHex = penColor.toString().replace('#', '%23');
                                 const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><circle cx='20' cy='20' r='2' fill='${penHex}' fill-opacity='0.2'/><circle cx='80' cy='40' r='3' fill='${penHex}' fill-opacity='0.15'/><circle cx='50' cy='80' r='1.5' fill='${penHex}' fill-opacity='0.3'/><path d='M70 15 L72 10 L74 15 L79 17 L74 19 L72 24 L70 19 L65 17 Z' fill='${penHex}' fill-opacity='0.25'/><circle cx='10' cy='60' r='1.5' fill='${penHex}' fill-opacity='0.25'/></svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
                             // Dynamic SVG Injection for Stars
                             else if (pattern === 'stars') {
-                                const penColor = frontmatter['pen-color'] || '#ffffff';
+                                const penColor = pen || '#ffffff';
                                 const c = penColor.toString().replace('#', '%23');
                                 // 4-pointed star path helper
                                 const sp = (cx: number, cy: number, s: number, op: number) => {
@@ -148,6 +172,66 @@ export default class VibgyorPlugin extends Plugin {
                                     `</svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
+                            // Dynamic SVG Injection for Halftone Wave
+                            else if (pattern === 'halftone') {
+                                const penColor = pen || '#ffffff';
+                                const c = penColor.toString().replace('#', '%23');
+                                const size = 100;
+                                const step = 8;
+                                let dots = "";
+                                for (let y = 0; y <= size; y += step) {
+                                    for (let x = 0; x <= size; x += step) {
+                                        // Diagonal wave effect: dots get larger/smaller along x+y
+                                        const val = (x + y) / (size * 2);
+                                        const r = 0.5 + Math.pow(Math.sin(val * Math.PI * 4), 2) * 2.5;
+                                        dots += `<circle cx='${x}' cy='${y}' r='${r}' fill='${c}' fill-opacity='0.25'/>`;
+                                    }
+                                }
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${size} ${size}' width='${size}' height='${size}'>${dots}</svg>`;
+                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
+                            }
+                            // Dynamic SVG Injection for Cyber Maze
+                            else if (pattern === 'maze') {
+                                const penColor = pen || '#ffffff';
+                                const c = penColor.toString().replace('#', '%23');
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' width='200' height='200'>` +
+                                    `<path d='M0 20 L40 20 L40 60 L10 60 L10 100 L60 100 L60 40 L100 40 L100 0 M120 0 L120 60 L80 60 L80 120 L20 120 L20 160 L80 160 L80 200 M140 200 L140 140 L100 140 L100 80 L160 80 L160 120 L200 120 M200 160 L160 160 L160 200 M0 180 L40 180 L40 140 L0 140 M180 0 L180 40 L140 40 L140 60 L200 60' fill='none' stroke='${c}' stroke-width='12' stroke-linecap='square' stroke-linejoin='miter' stroke-opacity='0.15'/>` +
+                                    `<path d='M40 0 L40 10 M80 0 L80 20 M160 0 L160 20 M200 20 L180 20 M200 100 L180 100 M0 80 L20 80 M120 200 L120 180 M180 200 L180 180 M0 40 L20 40' fill='none' stroke='${c}' stroke-width='12' stroke-linecap='square' stroke-linejoin='miter' stroke-opacity='0.15'/>` +
+                                    `</svg>`;
+                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
+                            }
+                            // Dynamic SVG Injection for Chevron
+                            else if (pattern === 'chevron') {
+                                const penColor = pen || '#ffffff';
+                                const c = penColor.toString().replace('#', '%23');
+                                // A mirrored diagonal stripe pattern (diamond-like)
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'>` +
+                                    `<path d='M0 0 L50 50 L0 100 M25 0 L75 50 L25 100 M50 0 L100 50 L50 100 M75 0 L125 50 L75 100 M-25 0 L25 50 L-25 100' fill='none' stroke='${c}' stroke-width='8' stroke-opacity='0.15' />` +
+                                    `<path d='M100 0 L50 50 L100 100 M75 0 L25 50 L75 100 M50 0 L0 50 L50 100 M125 0 L75 50 L125 100 M25 0 L-25 50 L25 100' fill='none' stroke='${c}' stroke-width='8' stroke-opacity='0.15' />` +
+                                    `</svg>`;
+                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
+                            }
+                            // Dynamic SVG Injection for Glitch Rain
+                            else if (pattern === 'glitch') {
+                                const penColor = pen || '#ffffff';
+                                const c = penColor.toString().replace('#', '%23');
+                                const size = 200;
+                                let dots = "";
+                                // Create diagonal streaks
+                                for (let i = 0; i < 40; i++) {
+                                    const startX = Math.random() * size;
+                                    const len = 40 + Math.random() * 80;
+                                    const op = 0.05 + Math.random() * 0.15;
+                                    const w = 1 + Math.random() * 3;
+                                    for (let j = 0; j < len; j += 4) {
+                                        const x = (startX + j * 0.2) % size;
+                                        const y = j % size;
+                                        dots += `<circle cx='${x}' cy='${y}' r='${w}' fill='${c}' fill-opacity='${op}'/>`;
+                                    }
+                                }
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${size} ${size}' width='${size}' height='${size}'>${dots}</svg>`;
+                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
+                            }
                             else {
                                 view.containerEl.style.removeProperty('--dynamic-svg');
                             }
@@ -156,8 +240,8 @@ export default class VibgyorPlugin extends Plugin {
                         // Auto-recolor images: generate an SVG filter that
                         // floods the pen color and composites with SourceAlpha,
                         // so only opaque pixels (ink) get the pen color.
-                        const penColor = (frontmatter['pen-color'] || '#000000').toString().replace('#', '%23');
-                        const svgFilter = `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='recolor'><feFlood flood-color='${penColor}' result='flood'/><feComposite in='flood' in2='SourceAlpha' operator='in'/></filter></svg>#recolor")`;
+                        const penColorForFilter = (pen || '#000000').toString().replace('#', '%23');
+                        const svgFilter = `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='recolor'><feFlood flood-color='${penColorForFilter}' result='flood'/><feComposite in='flood' in2='SourceAlpha' operator='in'/></filter></svg>#recolor")`;
                         view.containerEl.style.setProperty('--img-recolor-filter', svgFilter);
                     } else {
                         // If no theme properties, revert to default Obsidian behavior

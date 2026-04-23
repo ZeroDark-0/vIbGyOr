@@ -10,7 +10,8 @@ export class ThemeModal extends Modal {
     customAccentColor: string = "#ff9900";
     customPenColor: string = "#000000";
     customPagePattern: string = "none";
-    selectedCategory: string = "all";
+    selectedCategory: string = "";
+    selectedPatternCategory: string = "";
     isEditMode: boolean = false;
 
     constructor(app: App, plugin: VibgyorPlugin, isEditMode: boolean = false) {
@@ -51,16 +52,28 @@ export class ThemeModal extends Modal {
                     if (frontmatter['page-pattern']) this.customPagePattern = frontmatter['page-pattern'];
                     if (frontmatter['theme-id']) {
                         this.selectedThemeId = frontmatter['theme-id'];
+                    } else if (frontmatter['theme-name']) {
+                        const theme = this.plugin.settings.themes.find(t => t.name === frontmatter['theme-name']);
+                        if (theme) this.selectedThemeId = theme.id;
+                    }
+
+                    // Auto-identify categories for progressive disclosure
+                    if (this.selectedThemeId !== "custom") {
+                        const theme = this.plugin.settings.themes.find(t => t.id === this.selectedThemeId);
+                        if (theme) this.selectedCategory = theme.category || "normal";
+                    } else if (frontmatter['page-color']) {
+                        this.selectedCategory = "custom";
+                    }
+
+                    if (this.customPagePattern !== "none") {
+                        const allPatterns: Record<string, string> = {
+                            "lined": "basic", "dotted": "basic", "grid": "basic", "cornell": "basic", "blueprint": "basic",
+                            "woven": "geometry", "hexagonal": "geometry",
+                            "cosmos": "artistic", "stars": "artistic", "halftone": "artistic", "maze": "artistic", "chevron": "artistic"
+                        };
+                        this.selectedPatternCategory = allPatterns[this.customPagePattern] || "";
                     } else {
-                        // Fallback: Try to identify the theme by matching colors/pattern
-                        const matchingTheme = this.plugin.settings.themes.find(t => 
-                            t.pageColor === this.customPageColor &&
-                            t.penColor === this.customPenColor &&
-                            t.linkColor === this.customLinkColor &&
-                            t.accentColor === this.customAccentColor &&
-                            (t.pagePattern || "none") === this.customPagePattern
-                        );
-                        if (matchingTheme) this.selectedThemeId = matchingTheme.id;
+                        this.selectedPatternCategory = "basic"; // Default to basic if none
                     }
                 }
             } else {
@@ -77,13 +90,11 @@ export class ThemeModal extends Modal {
         containerEl.empty();
 
         // Theme Category Selection
-        new Setting(containerEl)
-            .setName("Theme type")
-            .setDesc("Filter presets by category.")
+        new Setting(containerEl).setName("Theme type")
             .addDropdown(dropdown => {
                 dropdown.addOptions({
-                    "all": "All categories",
-                    "normal": "Minimal themes",
+                    "": "Select theme type...",
+                    "normal": "Minimal themes (Normal)",
                     "advanced": "Advanced themes",
                     "custom": "Custom palettes"
                 });
@@ -93,6 +104,8 @@ export class ThemeModal extends Modal {
                     this.renderThemeSelection(containerEl);
                 });
             });
+
+        if (!this.selectedCategory) return;
 
         const isAdvancedOnly = this.selectedCategory === "advanced";
 
@@ -124,6 +137,7 @@ export class ThemeModal extends Modal {
 
         new Setting(containerEl)
             .setName("Theme preset")
+            .setClass("theme-dropdown-setting")
             .setDesc(isAdvancedOnly ? "Choose an advanced theme preset." : "Choose a preset or define custom colors.")
             .addDropdown(dropdown => {
                 dropdown.addOptions(options);
@@ -152,22 +166,53 @@ export class ThemeModal extends Modal {
                 .addColorPicker(c => { cAcc = c; c.setValue(this.customAccentColor).onChange(v => this.customAccentColor = v); })
                 .addColorPicker(c => { cPen = c; c.setValue(this.customPenColor).onChange(v => this.customPenColor = v); });
                 
-            new Setting(containerEl).setName("Page pattern")
-                .addDropdown(d => {
-                    patDropdown = d;
-                    d.addOptions({
-                        "none": "None",
-                        "lined": "Lined",
-                        "dotted": "Dotted",
-                        "grid": "Grid",
-                        "cornell": "Cornell",
-                        "blueprint": "Blueprint",
-                        "woven": "Woven",
-                        "hexagonal": "Hexagonal",
-                        "cosmos": "Space / Cosmos (Icon)",
-                        "stars": "Starfield"
-                    }).setValue(this.customPagePattern).onChange(v => this.customPagePattern = v);
+            new Setting(containerEl).setName("Pattern type")
+                .setDesc("Filter patterns by style.")
+                .addDropdown(dropdown => {
+                    dropdown.addOptions({
+                        "": "Select pattern type...",
+                        "basic": "Note / Paper",
+                        "geometry": "Geometric",
+                        "artistic": "Artistic / Space"
+                    });
+                    dropdown.setValue(this.selectedPatternCategory);
+                    dropdown.onChange(value => {
+                        this.selectedPatternCategory = value;
+                        this.renderThemeSelection(containerEl);
+                    });
                 });
+
+            if (this.selectedPatternCategory) {
+                const patternOptions: Record<string, string> = { "none": "None" };
+                const allPatterns: Record<string, {name: string, cat: string}> = {
+                    "lined": {name: "Lined", cat: "basic"},
+                    "dotted": {name: "Dotted", cat: "basic"},
+                    "grid": {name: "Grid", cat: "basic"},
+                    "cornell": {name: "Cornell", cat: "basic"},
+                    "blueprint": {name: "Blueprint", cat: "basic"},
+                    "woven": {name: "Woven", cat: "geometry"},
+                    "hexagonal": {name: "Hexagonal", cat: "geometry"},
+                    "cosmos": {name: "Space / Cosmos (Icon)", cat: "artistic"},
+                    "stars": {name: "Starfield", cat: "artistic"},
+                    "halftone": {name: "Halftone Wave", cat: "artistic"},
+                    "maze": {name: "Cyber Maze", cat: "artistic"},
+                    "chevron": {name: "Diamond Chevron", cat: "artistic"},
+                    "glitch": {name: "Glitch Rain", cat: "artistic"}
+                };
+
+                for (const [id, info] of Object.entries(allPatterns)) {
+                    if (info.cat === this.selectedPatternCategory) {
+                        patternOptions[id] = info.name;
+                    }
+                }
+
+                new Setting(containerEl).setName("Page pattern")
+                    .setClass("theme-dropdown-setting")
+                    .addDropdown(d => {
+                        patDropdown = d;
+                        d.addOptions(patternOptions).setValue(this.customPagePattern).onChange(v => this.customPagePattern = v);
+                    });
+            }
 
             // Initialize preview based on current selection
             this.updatePreview(this.selectedThemeId, pgSetting, cPage, cLink, cAcc, cPen, patDropdown);
@@ -238,17 +283,22 @@ export class ThemeModal extends Modal {
             const activeFile = this.app.workspace.getActiveFile();
             if (activeFile) {
                 await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: any) => {
-                    frontmatter['page-color'] = pg;
-                    frontmatter['link-color'] = lnk;
-                    frontmatter['accent-color'] = acc;
-                    frontmatter['pen-color'] = pen;
-                    frontmatter['page-pattern'] = pat;
-                    frontmatter['theme-id'] = this.selectedThemeId;
+                    // Delete old properties first to help with cleanup/ordering
+                    const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'theme-images'];
+                    keysToDelete.forEach(k => delete frontmatter[k]);
+
+                    // Set properties in desired order: 1. theme-name, 2. page-pattern, 3. theme-images
                     frontmatter['theme-name'] = themeName;
-                    if (gridCol) {
-                        frontmatter['grid-color'] = gridCol;
-                    } else {
-                        delete frontmatter['grid-color'];
+                    frontmatter['page-pattern'] = pat;
+                    frontmatter['theme-images'] = true;
+
+                    // If custom, we still need the colors to function
+                    if (this.selectedThemeId === "custom") {
+                        frontmatter['page-color'] = pg;
+                        frontmatter['link-color'] = lnk;
+                        frontmatter['accent-color'] = acc;
+                        frontmatter['pen-color'] = pen;
+                        if (gridCol) frontmatter['grid-color'] = gridCol;
                     }
                 });
                 new Notice("Theme rules updated!");
@@ -260,10 +310,17 @@ export class ThemeModal extends Modal {
                 return;
             }
             const fileName = `${this.noteTitle}.md`;
-            const gridLine = gridCol ? `\ngrid-color: "${gridCol}"` : '';
-            const themeIdLine = `\ntheme-id: "${this.selectedThemeId}"`;
-            const themeNameLine = `\ntheme-name: "${themeName}"`;
-            const fileContent = `---\npage-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\npage-pattern: "${pat}"${gridLine}${themeIdLine}${themeNameLine}\n---\n\n`;
+            
+            let fileContent = `---\n`;
+            fileContent += `theme-name: "${themeName}"\n`;
+            fileContent += `page-pattern: "${pat}"\n`;
+            fileContent += `theme-images: true\n`;
+            
+            if (this.selectedThemeId === "custom") {
+                fileContent += `page-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\n`;
+                if (gridCol) fileContent += `grid-color: "${gridCol}"\n`;
+            }
+            fileContent += `---\n\n`;
 
             try {
                 const file = await this.app.vault.create(fileName, fileContent);

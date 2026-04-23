@@ -21,11 +21,14 @@ export interface VibgyorSettings {
 export const DEFAULT_SETTINGS: VibgyorSettings = {
     themes: [
         { id: "default-dark", name: "Dark Mode Preset", category: "custom", pageColor: "#202020", linkColor: "#5588ff", accentColor: "#ff9900", penColor: "#ffffff", isPreset: true },
-        { id: "default-light", name: "Light Mode Preset", category: "custom", pageColor: "#ffffff", linkColor: "#3366cc", accentColor: "#ff9900", penColor: "#000000", isPreset: true },
+        { id: "default-light", name: "Light Mode Preset", category: "custom", pageColor: "#ffffff", linkColor: "#4f46e5", accentColor: "#ff9900", penColor: "#000000", isPreset: true },
         { id: "vampire-palette", name: "Vampire Palette", category: "normal", pageColor: "#1a1112", linkColor: "#d74241", accentColor: "#85161a", penColor: "#eeefef", isPreset: true },
         { id: "sepia-palette", name: "Sepia Palette", category: "normal", pageColor: "#f4ecd8", linkColor: "#5c4331", accentColor: "#d97742", penColor: "#433422", isPreset: true },
         { id: "nord-dark", name: "Nord Dark", category: "normal", pageColor: "#2e3440", linkColor: "#88c0d0", accentColor: "#5e81ac", penColor: "#eceff4", isPreset: true },
-        { id: "neon-noir", name: "Neon Noir", category: "normal", pageColor: "#000000", linkColor: "#00e5ff", accentColor: "#ffffff", penColor: "#cfffe2", isPreset: true }
+        { id: "neon-noir", name: "Neon Noir", category: "normal", pageColor: "#000000", linkColor: "#00e5ff", accentColor: "#ffffff", penColor: "#cfffe2", isPreset: true },
+        { id: "crimson-ember", name: "Crimson Ember", category: "normal", pageColor: "#0c0c0c", linkColor: "#ff7b54", accentColor: "#481e14", penColor: "#f2613f", isPreset: true },
+        { id: "twilight-harbor", name: "Twilight Harbor", category: "normal", pageColor: "#fbe4d6", linkColor: "#4338ca", accentColor: "#261fb3", penColor: "#0c0950", isPreset: true },
+        { id: "imperial-noir", name: "Imperial Noir", category: "normal", pageColor: "#121312", linkColor: "#ad0013", accentColor: "#ad0013", penColor: "#a67d43", isPreset: true }
     ]
 }
 
@@ -133,7 +136,7 @@ export class VibgyorSettingTab extends PluginSettingTab {
 
     private renderThemeCard(parentEl: HTMLElement, theme: ThemeEntry, index: number): void {
         const themeDiv = parentEl.createDiv({cls: 'theme-card'});
-        const isPreset = theme.isPreset || ["default-dark", "default-light", "vampire-palette", "sepia-palette", "nord-dark", "neon-noir"].includes(theme.id);
+        const isPreset = theme.isPreset || ["default-dark", "default-light", "vampire-palette", "sepia-palette", "nord-dark", "neon-noir", "crimson-ember", "twilight-harbor", "imperial-noir"].includes(theme.id);
 
         // Color preview strip at the top
         const previewStrip = themeDiv.createDiv({cls: 'theme-preview-strip'});
