@@ -92,7 +92,7 @@ export default class VibgyorPlugin extends Plugin {
                 // Target specifically the container showing THIS file
                 if (view.file && view.file.path === file.path && view.containerEl) {
                     // Clean up potential old pattern classes
-                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-stars', 'pattern-halftone', 'pattern-maze', 'pattern-chevron', 'pattern-glitch', 'pattern-checkerboard');
+                    view.containerEl.classList.remove('pattern-lined', 'pattern-dotted', 'pattern-grid', 'pattern-cornell', 'pattern-blueprint', 'pattern-woven', 'pattern-hexagonal', 'pattern-cosmos', 'pattern-stars', 'pattern-waves', 'pattern-maze', 'pattern-circuit', 'pattern-checkerboard');
 
                     let pg = frontmatter['page-color'];
                     let pen = frontmatter['pen-color'];
@@ -132,7 +132,7 @@ export default class VibgyorPlugin extends Plugin {
                         
                         // Handle Page Pattern
                         const pattern = pat || frontmatter['page-pattern'];
-                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'stars', 'halftone', 'maze', 'chevron', 'glitch', 'checkerboard'].includes(pattern)) {
+                        if (pattern && ['lined', 'dotted', 'grid', 'cornell', 'blueprint', 'woven', 'hexagonal', 'cosmos', 'stars', 'waves', 'maze', 'circuit', 'checkerboard'].includes(pattern)) {
                             view.containerEl.classList.add(`pattern-${pattern}`);
                             
                             // Dynamic SVG Injection for Cosmos
@@ -172,22 +172,24 @@ export default class VibgyorPlugin extends Plugin {
                                     `</svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
-                            // Dynamic SVG Injection for Halftone Wave
-                            else if (pattern === 'halftone') {
+                            // Dynamic SVG Injection for Zen Waves
+                            else if (pattern === 'waves') {
                                 const penColor = pen || '#ffffff';
                                 const c = penColor.toString().replace('#', '%23');
-                                const size = 100;
-                                const step = 8;
-                                let dots = "";
-                                for (let y = 0; y <= size; y += step) {
-                                    for (let x = 0; x <= size; x += step) {
-                                        // Diagonal wave effect: dots get larger/smaller along x+y
-                                        const val = (x + y) / (size * 2);
-                                        const r = 0.5 + Math.pow(Math.sin(val * Math.PI * 4), 2) * 2.5;
-                                        dots += `<circle cx='${x}' cy='${y}' r='${r}' fill='${c}' fill-opacity='0.25'/>`;
-                                    }
-                                }
-                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${size} ${size}' width='${size}' height='${size}'>${dots}</svg>`;
+                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' width='100' height='50'>` +
+                                    `<circle cx='50' cy='50' r='40' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='50' cy='50' r='30' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='50' cy='50' r='20' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='50' cy='50' r='10' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='0' cy='0' r='40' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='0' cy='0' r='30' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='0' cy='0' r='20' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='0' cy='0' r='10' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='100' cy='0' r='40' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='100' cy='0' r='30' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='100' cy='0' r='20' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='100' cy='0' r='10' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `</svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
                             // Dynamic SVG Injection for Cyber Maze
@@ -200,36 +202,17 @@ export default class VibgyorPlugin extends Plugin {
                                     `</svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
-                            // Dynamic SVG Injection for Chevron
-                            else if (pattern === 'chevron') {
+                            // Dynamic SVG Injection for Cyber Circuit
+                            else if (pattern === 'circuit') {
                                 const penColor = pen || '#ffffff';
                                 const c = penColor.toString().replace('#', '%23');
-                                // A mirrored diagonal stripe pattern (diamond-like)
                                 const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'>` +
-                                    `<path d='M0 0 L50 50 L0 100 M25 0 L75 50 L25 100 M50 0 L100 50 L50 100 M75 0 L125 50 L75 100 M-25 0 L25 50 L-25 100' fill='none' stroke='${c}' stroke-width='8' stroke-opacity='0.15' />` +
-                                    `<path d='M100 0 L50 50 L100 100 M75 0 L25 50 L75 100 M50 0 L0 50 L50 100 M125 0 L75 50 L125 100 M25 0 L-25 50 L25 100' fill='none' stroke='${c}' stroke-width='8' stroke-opacity='0.15' />` +
+                                    `<path d='M0 50 L30 50 L40 60 L40 100 M60 0 L60 40 L70 50 L100 50 M20 0 L20 20 L30 30 L70 30 L80 20 L80 0 M0 80 L20 80 L30 70 L70 70 L80 80 L80 100' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
+                                    `<circle cx='40' cy='60' r='3' fill='${c}' fill-opacity='0.2'/>` +
+                                    `<circle cx='60' cy='40' r='3' fill='${c}' fill-opacity='0.2'/>` +
+                                    `<circle cx='30' cy='30' r='3' fill='${c}' fill-opacity='0.2'/>` +
+                                    `<circle cx='70' cy='70' r='3' fill='${c}' fill-opacity='0.2'/>` +
                                     `</svg>`;
-                                view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
-                            }
-                            // Dynamic SVG Injection for Glitch Rain
-                            else if (pattern === 'glitch') {
-                                const penColor = pen || '#ffffff';
-                                const c = penColor.toString().replace('#', '%23');
-                                const size = 200;
-                                let dots = "";
-                                // Create diagonal streaks
-                                for (let i = 0; i < 40; i++) {
-                                    const startX = Math.random() * size;
-                                    const len = 40 + Math.random() * 80;
-                                    const op = 0.05 + Math.random() * 0.15;
-                                    const w = 1 + Math.random() * 3;
-                                    for (let j = 0; j < len; j += 4) {
-                                        const x = (startX + j * 0.2) % size;
-                                        const y = j % size;
-                                        dots += `<circle cx='${x}' cy='${y}' r='${w}' fill='${c}' fill-opacity='${op}'/>`;
-                                    }
-                                }
-                                const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${size} ${size}' width='${size}' height='${size}'>${dots}</svg>`;
                                 view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
                             }
                             else {

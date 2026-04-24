@@ -127,14 +127,12 @@
 .custom-note-theme.pattern-cosmos .cm-scroller,
 .custom-note-theme.pattern-stars .markdown-reading-view,
 .custom-note-theme.pattern-stars .cm-scroller,
-.custom-note-theme.pattern-halftone .markdown-reading-view,
-.custom-note-theme.pattern-halftone .cm-scroller,
+.custom-note-theme.pattern-waves .markdown-reading-view,
+.custom-note-theme.pattern-waves .cm-scroller,
 .custom-note-theme.pattern-maze .markdown-reading-view,
 .custom-note-theme.pattern-maze .cm-scroller,
-.custom-note-theme.pattern-chevron .markdown-reading-view,
-.custom-note-theme.pattern-chevron .cm-scroller,
-.custom-note-theme.pattern-glitch .markdown-reading-view,
-.custom-note-theme.pattern-glitch .cm-scroller {
+.custom-note-theme.pattern-circuit .markdown-reading-view,
+.custom-note-theme.pattern-circuit .cm-scroller {
     background-image: var(--dynamic-svg) !important;
     background-repeat: repeat;
     background-attachment: local;

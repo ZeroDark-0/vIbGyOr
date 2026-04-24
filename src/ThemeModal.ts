@@ -69,7 +69,7 @@ export class ThemeModal extends Modal {
                         const allPatterns: Record<string, string> = {
                             "lined": "basic", "dotted": "basic", "grid": "basic", "cornell": "basic", "blueprint": "basic",
                             "woven": "geometry", "hexagonal": "geometry",
-                            "cosmos": "artistic", "stars": "artistic", "halftone": "artistic", "maze": "artistic", "chevron": "artistic"
+                            "cosmos": "artistic", "stars": "artistic", "waves": "artistic", "maze": "artistic", "circuit": "artistic"
                         };
                         this.selectedPatternCategory = allPatterns[this.customPagePattern] || "";
                     } else {
@@ -194,10 +194,9 @@ export class ThemeModal extends Modal {
                     "hexagonal": {name: "Hexagonal", cat: "geometry"},
                     "cosmos": {name: "Space / Cosmos (Icon)", cat: "artistic"},
                     "stars": {name: "Starfield", cat: "artistic"},
-                    "halftone": {name: "Halftone Wave", cat: "artistic"},
+                    "waves": {name: "Zen Waves", cat: "artistic"},
                     "maze": {name: "Cyber Maze", cat: "artistic"},
-                    "chevron": {name: "Diamond Chevron", cat: "artistic"},
-                    "glitch": {name: "Glitch Rain", cat: "artistic"}
+                    "circuit": {name: "Cyber Circuit", cat: "artistic"}
                 };
 
                 for (const [id, info] of Object.entries(allPatterns)) {
@@ -287,10 +286,9 @@ export class ThemeModal extends Modal {
                     const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'theme-images'];
                     keysToDelete.forEach(k => delete frontmatter[k]);
 
-                    // Set properties in desired order: 1. theme-name, 2. page-pattern, 3. theme-images
+                    // Set properties in desired order: 1. theme-name, 2. page-pattern
                     frontmatter['theme-name'] = themeName;
                     frontmatter['page-pattern'] = pat;
-                    frontmatter['theme-images'] = true;
 
                     // If custom, we still need the colors to function
                     if (this.selectedThemeId === "custom") {
@@ -314,7 +312,6 @@ export class ThemeModal extends Modal {
             let fileContent = `---\n`;
             fileContent += `theme-name: "${themeName}"\n`;
             fileContent += `page-pattern: "${pat}"\n`;
-            fileContent += `theme-images: true\n`;
             
             if (this.selectedThemeId === "custom") {
                 fileContent += `page-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\n`;
