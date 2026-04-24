@@ -36,14 +36,18 @@
     --metadata-input-background-active: color-mix(in srgb, var(--note-pen-color) 20%, transparent) !important;
     --metadata-divider-color: color-mix(in srgb, var(--note-pen-color) 15%, transparent) !important;
     --pill-color: var(--note-pen-color) !important;
+    --caret-color: var(--note-pen-color) !important;
 }
 
 /* Hard override components that might ignore variables */
 .custom-note-theme .markdown-reading-view,
 .custom-note-theme .cm-scroller,
-.custom-note-theme .cm-editor {
+.custom-note-theme .cm-editor,
+.custom-note-theme .cm-cursorLayer .cm-cursor {
     background-color: var(--note-page-color) !important;
     color: var(--note-pen-color) !important;
+    caret-color: var(--note-pen-color) !important;
+    border-left-color: var(--note-pen-color) !important;
 }
 
 /* Force all link types to use preset link color */

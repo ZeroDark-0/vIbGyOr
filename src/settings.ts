@@ -30,7 +30,8 @@ export const DEFAULT_SETTINGS: VibgyorSettings = {
         { id: "neon-noir", name: "Neon Noir", category: "normal", pageColor: "#000000", linkColor: "#00e5ff", accentColor: "#ffffff", penColor: "#cfffe2", isPreset: true },
         { id: "crimson-ember", name: "Crimson Ember", category: "normal", pageColor: "#0c0c0c", linkColor: "#ff7b54", accentColor: "#481e14", penColor: "#f2613f", isPreset: true },
         { id: "twilight-harbor", name: "Twilight Harbor", category: "normal", pageColor: "#fbe4d6", linkColor: "#4338ca", accentColor: "#261fb3", penColor: "#0c0950", isPreset: true },
-        { id: "imperial-noir", name: "Imperial Noir", category: "normal", pageColor: "#121312", linkColor: "#ad0013", accentColor: "#ad0013", penColor: "#a67d43", isPreset: true }
+        { id: "imperial-noir", name: "Imperial Noir", category: "normal", pageColor: "#121312", linkColor: "#ad0013", accentColor: "#ad0013", penColor: "#a67d43", isPreset: true },
+        { id: "mint-grove", name: "Midnight Mint", category: "normal", pageColor: "#091413", linkColor: "#285a48", accentColor: "#408a71", penColor: "#b0e4cc", isPreset: true }
     ]
 }
 
@@ -138,7 +139,7 @@ export class VibgyorSettingTab extends PluginSettingTab {
 
     private renderThemeCard(parentEl: HTMLElement, theme: ThemeEntry, index: number): void {
         const themeDiv = parentEl.createDiv({cls: 'theme-card'});
-        const isPreset = theme.isPreset || ["default-dark", "default-light", "vampire-palette", "sepia-palette", "nord-dark", "neon-noir", "crimson-ember", "twilight-harbor", "imperial-noir"].includes(theme.id);
+        const isPreset = theme.isPreset || ["default-dark", "default-light", "vampire-palette", "sepia-palette", "nord-dark", "neon-noir", "crimson-ember", "twilight-harbor", "imperial-noir", "mint-grove"].includes(theme.id);
 
         // Color preview strip at the top
         const previewStrip = themeDiv.createDiv({cls: 'theme-preview-strip'});
