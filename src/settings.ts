@@ -16,9 +16,11 @@ export interface ThemeEntry {
 
 export interface VibgyorSettings {
     themes: ThemeEntry[];
+    originalImages: string[];
 }
 
 export const DEFAULT_SETTINGS: VibgyorSettings = {
+    originalImages: [],
     themes: [
         { id: "default-dark", name: "Dark Mode Preset", category: "custom", pageColor: "#202020", linkColor: "#5588ff", accentColor: "#ff9900", penColor: "#ffffff", isPreset: true },
         { id: "default-light", name: "Light Mode Preset", category: "custom", pageColor: "#ffffff", linkColor: "#4f46e5", accentColor: "#ff9900", penColor: "#000000", isPreset: true },

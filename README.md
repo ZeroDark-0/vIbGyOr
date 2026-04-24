@@ -58,7 +58,7 @@ page-pattern: "grid"     # Pattern type (none, lined, dotted, grid, etc.)
 ```
 
 ### Supported Patterns
-- `lined`, `dotted`, `grid`, `cornell`, `blueprint`, `woven`, `hexagonal`, `cosmos`, `stars`, `halftone`, `maze`, `chevron`
+- `lined`, `dotted`, `grid`, `cornell`, `blueprint`, `woven`, `hexagonal`, `cosmos`, `stars`, `halftone`, `maze`, `chevron`, `glitch`
 
 ## Installation
 

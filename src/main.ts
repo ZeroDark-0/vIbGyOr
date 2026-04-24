@@ -1,4 +1,4 @@
-import {Plugin, TFile, Notice, MarkdownView} from 'obsidian';
+import {Plugin, TFile, Notice, MarkdownView, setIcon} from 'obsidian';
 import {DEFAULT_SETTINGS, VibgyorSettings, VibgyorSettingTab} from "./settings";
 import {ThemeModal} from "./ThemeModal";
 
@@ -79,7 +79,79 @@ export default class VibgyorPlugin extends Plugin {
             const file = this.app.workspace.getActiveFile();
             if (file) this.applyThemeToLeaf(file);
         });
+
+        this.setupImageToggle();
 	}
+
+    setupImageToggle() {
+        const toggleBtn = document.createElement('div');
+        toggleBtn.classList.add('vibgyor-img-toggle-btn');
+        setIcon(toggleBtn, 'arrow-up-down');
+        toggleBtn.title = 'Toggle image colors';
+        document.body.appendChild(toggleBtn);
+        
+        let currentImg: HTMLImageElement | null = null;
+
+        this.registerDomEvent(document, 'mouseover', (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'IMG' && target.closest('.custom-note-theme')) {
+                const img = target as HTMLImageElement;
+                currentImg = img;
+                
+                const rect = img.getBoundingClientRect();
+                toggleBtn.style.top = `${rect.top + 8}px`;
+                toggleBtn.style.left = `${rect.left + 8}px`;
+                toggleBtn.style.display = 'flex';
+
+                const isOriginal = img.getAttribute('data-original-mode') === 'true';
+                toggleBtn.title = isOriginal ? 'Re-apply theme color' : 'View original colors';
+            } else if (target === toggleBtn || toggleBtn.contains(target)) {
+                // Keep visible
+            } else {
+                toggleBtn.style.display = 'none';
+                currentImg = null;
+            }
+        });
+
+        this.registerDomEvent(document, 'scroll', () => {
+            if (currentImg && toggleBtn.style.display !== 'none') {
+                const rect = currentImg.getBoundingClientRect();
+                if (rect.top > window.innerHeight || rect.bottom < 0 || rect.left > window.innerWidth || rect.right < 0) {
+                    toggleBtn.style.display = 'none';
+                    currentImg = null;
+                } else {
+                    toggleBtn.style.top = `${rect.top + 8}px`;
+                    toggleBtn.style.left = `${rect.left + 8}px`;
+                }
+            }
+        }, true);
+
+        toggleBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (currentImg) {
+                const src = currentImg.getAttribute('src');
+                if (!src) return;
+                
+                const isOriginal = currentImg.getAttribute('data-original-mode') === 'true';
+                
+                if (isOriginal) {
+                    currentImg.removeAttribute('data-original-mode');
+                    toggleBtn.title = 'View original colors';
+                    if (this.settings.originalImages) {
+                        this.settings.originalImages = this.settings.originalImages.filter(s => s !== src);
+                    }
+                } else {
+                    currentImg.setAttribute('data-original-mode', 'true');
+                    toggleBtn.title = 'Re-apply theme color';
+                    if (!this.settings.originalImages) this.settings.originalImages = [];
+                    if (!this.settings.originalImages.includes(src)) {
+                        this.settings.originalImages.push(src);
+                    }
+                }
+                await this.saveSettings();
+            }
+        });
+    }
 
     applyThemeToLeaf(file: TFile) {
         // Wait a brief moment to ensure the DOM is ready for styles
@@ -226,6 +298,16 @@ export default class VibgyorPlugin extends Plugin {
                         const penColorForFilter = (pen || '#000000').toString().replace('#', '%23');
                         const svgFilter = `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='recolor'><feFlood flood-color='${penColorForFilter}' result='flood'/><feComposite in='flood' in2='SourceAlpha' operator='in'/></filter></svg>#recolor")`;
                         view.containerEl.style.setProperty('--img-recolor-filter', svgFilter);
+
+                        const imgs = view.containerEl.querySelectorAll('img');
+                        imgs.forEach(img => {
+                            const src = img.getAttribute('src');
+                            if (src && this.settings.originalImages && this.settings.originalImages.includes(src)) {
+                                img.setAttribute('data-original-mode', 'true');
+                            } else {
+                                img.removeAttribute('data-original-mode');
+                            }
+                        });
                     } else {
                         // If no theme properties, revert to default Obsidian behavior
                         view.containerEl.style.removeProperty('--note-page-color');

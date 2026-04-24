@@ -276,3 +276,35 @@
     filter: var(--img-recolor-filter) !important;
     transition: filter 0.3s ease;
 }
+
+.custom-note-theme img[data-original-mode="true"] {
+    filter: none !important;
+}
+
+/* Floating Image Toggle Button */
+.vibgyor-img-toggle-btn {
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    transition: transform 0.1s ease, background 0.1s ease;
+    user-select: none;
+}
+
+.vibgyor-img-toggle-btn:hover {
+    background: var(--background-modifier-hover);
+    transform: scale(1.05);
+}
+
+.vibgyor-img-toggle-btn:active {
+    transform: scale(0.95);
+}
