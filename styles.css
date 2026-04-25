@@ -1,158 +1,161 @@
 /* vibgyor Base CSS */
-.custom-note-theme {
+
+/* Using doubled class selector (.custom-note-theme.custom-note-theme) for
+   specificity instead of !important, per Obsidian plugin guidelines. */
+body .custom-note-theme.custom-note-theme {
     /* Backgrounds */
-    --background-primary: var(--note-page-color) !important;
-    --background-primary-alt: var(--note-page-color) !important;
-    --background-secondary: var(--note-page-color) !important;
+    --background-primary: var(--note-page-color);
+    --background-primary-alt: var(--note-page-color);
+    --background-secondary: var(--note-page-color);
     
     /* Text */
-    --text-normal: var(--note-pen-color) !important;
-    --text-muted: var(--note-pen-color) !important;
-    --text-faint: var(--note-pen-color) !important;
+    --text-normal: var(--note-pen-color);
+    --text-muted: var(--note-pen-color);
+    --text-faint: var(--note-pen-color);
 
     /* Links */
-    --text-a: var(--note-link-color) !important;
-    --text-a-hover: var(--note-link-color) !important;
-    --link-color: var(--note-link-color) !important;
-    --link-external-color: var(--note-link-color) !important;
-    --link-unresolved-color: var(--note-link-color) !important;
+    --text-a: var(--note-link-color);
+    --text-a-hover: var(--note-link-color);
+    --link-color: var(--note-link-color);
+    --link-external-color: var(--note-link-color);
+    --link-unresolved-color: var(--note-link-color);
 
     /* Accents & Headers */
-    --text-accent: var(--note-accent-color) !important;
-    --text-accent-hover: var(--note-accent-color) !important;
-    --interactive-accent: var(--note-accent-color) !important;
-    --h1-color: var(--note-accent-color) !important;
-    --h2-color: var(--note-accent-color) !important;
-    --h3-color: var(--note-accent-color) !important;
-    --h4-color: var(--note-accent-color) !important;
-    --h5-color: var(--note-accent-color) !important;
-    --h6-color: var(--note-accent-color) !important;
+    --text-accent: var(--note-accent-color);
+    --text-accent-hover: var(--note-accent-color);
+    --interactive-accent: var(--note-accent-color);
+    --h1-color: var(--note-accent-color);
+    --h2-color: var(--note-accent-color);
+    --h3-color: var(--note-accent-color);
+    --h4-color: var(--note-accent-color);
+    --h5-color: var(--note-accent-color);
+    --h6-color: var(--note-accent-color);
 
     /* Properties / Metadata Block */
-    --metadata-label-text-color: color-mix(in srgb, var(--note-pen-color) 60%, transparent) !important;
-    --metadata-input-text-color: var(--note-pen-color) !important;
-    --metadata-input-background: color-mix(in srgb, var(--note-pen-color) 10%, transparent) !important;
-    --metadata-input-background-hover: color-mix(in srgb, var(--note-pen-color) 15%, transparent) !important;
-    --metadata-input-background-active: color-mix(in srgb, var(--note-pen-color) 20%, transparent) !important;
-    --metadata-divider-color: color-mix(in srgb, var(--note-pen-color) 15%, transparent) !important;
-    --pill-color: var(--note-pen-color) !important;
-    --caret-color: var(--note-pen-color) !important;
+    --metadata-label-text-color: color-mix(in srgb, var(--note-pen-color) 60%, transparent);
+    --metadata-input-text-color: var(--note-pen-color);
+    --metadata-input-background: color-mix(in srgb, var(--note-pen-color) 10%, transparent);
+    --metadata-input-background-hover: color-mix(in srgb, var(--note-pen-color) 15%, transparent);
+    --metadata-input-background-active: color-mix(in srgb, var(--note-pen-color) 20%, transparent);
+    --metadata-divider-color: color-mix(in srgb, var(--note-pen-color) 15%, transparent);
+    --pill-color: var(--note-pen-color);
+    --caret-color: var(--note-pen-color);
 }
 
 /* Hard override components that might ignore variables */
-.custom-note-theme .markdown-reading-view,
-.custom-note-theme .cm-scroller,
-.custom-note-theme .cm-editor,
-.custom-note-theme .cm-cursorLayer .cm-cursor {
-    background-color: var(--note-page-color) !important;
-    color: var(--note-pen-color) !important;
-    caret-color: var(--note-pen-color) !important;
-    border-left-color: var(--note-pen-color) !important;
+body .custom-note-theme.custom-note-theme .markdown-reading-view,
+body .custom-note-theme.custom-note-theme .cm-scroller,
+body .custom-note-theme.custom-note-theme .cm-editor,
+body .custom-note-theme.custom-note-theme .cm-cursorLayer .cm-cursor {
+    background-color: var(--note-page-color);
+    color: var(--note-pen-color);
+    caret-color: var(--note-pen-color);
+    border-left-color: var(--note-pen-color);
 }
 
 /* Force all link types to use preset link color */
-.custom-note-theme a,
-.custom-note-theme .external-link,
-.custom-note-theme .internal-link,
-.custom-note-theme .cm-link,
-.custom-note-theme .cm-url,
-.custom-note-theme .cm-hmd-internal-link,
-.custom-note-theme .markdown-rendered a {
-    color: var(--note-link-color) !important;
+body .custom-note-theme.custom-note-theme a,
+body .custom-note-theme.custom-note-theme .external-link,
+body .custom-note-theme.custom-note-theme .internal-link,
+body .custom-note-theme.custom-note-theme .cm-link,
+body .custom-note-theme.custom-note-theme .cm-url,
+body .custom-note-theme.custom-note-theme .cm-hmd-internal-link,
+body .custom-note-theme.custom-note-theme .markdown-rendered a {
+    color: var(--note-link-color);
 }
 
 /* --- Notebook Page Patterns --- */
 /* We apply these to the inner scroll containers so they scroll nicely */
 
-.custom-note-theme.pattern-lined .markdown-reading-view,
-.custom-note-theme.pattern-lined .cm-scroller {
-    background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pen-color) 35%, transparent) 30px) !important;
+body .custom-note-theme.pattern-lined .markdown-reading-view,
+body .custom-note-theme.pattern-lined .cm-scroller {
+    background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pen-color) 35%, transparent) 30px);
 }
 
-.custom-note-theme.pattern-dotted .markdown-reading-view,
-.custom-note-theme.pattern-dotted .cm-scroller {
-    background-image: radial-gradient(color-mix(in srgb, var(--note-pen-color) 45%, transparent) 1.5px, transparent 1.5px) !important;
-    background-size: 30px 30px !important;
+body .custom-note-theme.pattern-dotted .markdown-reading-view,
+body .custom-note-theme.pattern-dotted .cm-scroller {
+    background-image: radial-gradient(color-mix(in srgb, var(--note-pen-color) 45%, transparent) 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
 }
 
-.custom-note-theme.pattern-grid .markdown-reading-view,
-.custom-note-theme.pattern-grid .cm-scroller {
+body .custom-note-theme.pattern-grid .markdown-reading-view,
+body .custom-note-theme.pattern-grid .cm-scroller {
     background-image: 
         linear-gradient(color-mix(in srgb, var(--note-pen-color) 25%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 25%, transparent) 1px, transparent 1px) !important;
-    background-size: 30px 30px !important;
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 25%, transparent) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
 /* 1. Cornell (Lines + Margin) */
-.custom-note-theme.pattern-cornell .markdown-reading-view,
-.custom-note-theme.pattern-cornell .cm-scroller {
+body .custom-note-theme.pattern-cornell .markdown-reading-view,
+body .custom-note-theme.pattern-cornell .cm-scroller {
     background-image: 
         repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pen-color) 35%, transparent) 30px),
-        linear-gradient(90deg, transparent 79px, color-mix(in srgb, var(--note-accent-color) 60%, transparent) 80.5px, transparent 82px) !important;
+        linear-gradient(90deg, transparent 79px, color-mix(in srgb, var(--note-accent-color) 60%, transparent) 80.5px, transparent 82px);
     background-attachment: local;
 }
 
 /* 2. Blueprint (Thick grids + thin grids) */
-.custom-note-theme.pattern-blueprint .markdown-reading-view,
-.custom-note-theme.pattern-blueprint .cm-scroller {
+body .custom-note-theme.pattern-blueprint .markdown-reading-view,
+body .custom-note-theme.pattern-blueprint .cm-scroller {
     background-image: 
         linear-gradient(color-mix(in srgb, var(--note-pen-color) 30%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 30%, transparent) 1px, transparent 1px),
         linear-gradient(color-mix(in srgb, var(--note-pen-color) 10%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 10%, transparent) 1px, transparent 1px) !important;
-    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px !important;
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 10%, transparent) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
     background-attachment: local;
 }
 
 /* 3. Woven / Crosshatch */
-.custom-note-theme.pattern-woven .markdown-reading-view,
-.custom-note-theme.pattern-woven .cm-scroller {
+body .custom-note-theme.pattern-woven .markdown-reading-view,
+body .custom-note-theme.pattern-woven .cm-scroller {
     background-image: 
         repeating-linear-gradient(45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 11px),
-        repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 11px) !important;
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 11px);
     background-attachment: local;
 }
 
 
 
 /* 5. Sci-Fi Hexagonal */
-.custom-note-theme.pattern-hexagonal .markdown-reading-view,
-.custom-note-theme.pattern-hexagonal .cm-scroller {
+body .custom-note-theme.pattern-hexagonal .markdown-reading-view,
+body .custom-note-theme.pattern-hexagonal .cm-scroller {
     background-image: 
         linear-gradient(30deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px),
         linear-gradient(150deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px) !important;
-    background-size: 40px 69.28px !important; 
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px);
+    background-size: 40px 69.28px; 
     background-attachment: local;
 }
 
 /* --- Cosmos & Stars Patterns (dynamic SVG) --- */
-.custom-note-theme.pattern-cosmos .markdown-reading-view,
-.custom-note-theme.pattern-cosmos .cm-scroller,
-.custom-note-theme.pattern-stars .markdown-reading-view,
-.custom-note-theme.pattern-stars .cm-scroller,
-.custom-note-theme.pattern-waves .markdown-reading-view,
-.custom-note-theme.pattern-waves .cm-scroller,
-.custom-note-theme.pattern-maze .markdown-reading-view,
-.custom-note-theme.pattern-maze .cm-scroller,
-.custom-note-theme.pattern-circuit .markdown-reading-view,
-.custom-note-theme.pattern-circuit .cm-scroller {
-    background-image: var(--dynamic-svg) !important;
+body .custom-note-theme.pattern-cosmos .markdown-reading-view,
+body .custom-note-theme.pattern-cosmos .cm-scroller,
+body .custom-note-theme.pattern-stars .markdown-reading-view,
+body .custom-note-theme.pattern-stars .cm-scroller,
+body .custom-note-theme.pattern-waves .markdown-reading-view,
+body .custom-note-theme.pattern-waves .cm-scroller,
+body .custom-note-theme.pattern-maze .markdown-reading-view,
+body .custom-note-theme.pattern-maze .cm-scroller,
+body .custom-note-theme.pattern-circuit .markdown-reading-view,
+body .custom-note-theme.pattern-circuit .cm-scroller {
+    background-image: var(--dynamic-svg);
     background-repeat: repeat;
     background-attachment: local;
 }
 
 /* 6. Checkerboard — uses --note-grid-color for the squares */
-.custom-note-theme.pattern-checkerboard .markdown-reading-view,
-.custom-note-theme.pattern-checkerboard .cm-scroller {
-    background-image: conic-gradient(from 90deg at 50% 50%, var(--note-grid-color, var(--note-pen-color)) 90deg, transparent 90deg 180deg, var(--note-grid-color, var(--note-pen-color)) 180deg 270deg, transparent 270deg) !important;
-    background-size: 30px 30px !important;
+body .custom-note-theme.pattern-checkerboard .markdown-reading-view,
+body .custom-note-theme.pattern-checkerboard .cm-scroller {
+    background-image: conic-gradient(from 90deg at 50% 50%, var(--note-grid-color, var(--note-pen-color)) 90deg, transparent 90deg 180deg, var(--note-grid-color, var(--note-pen-color)) 180deg 270deg, transparent 270deg);
+    background-size: 30px 30px;
     background-attachment: local;
 }
 
 /* Readable text overlay for checkerboard */
-.custom-note-theme.pattern-checkerboard .markdown-reading-view .markdown-preview-sizer,
-.custom-note-theme.pattern-checkerboard .cm-scroller .cm-content {
+body .custom-note-theme.pattern-checkerboard .markdown-reading-view .markdown-preview-sizer,
+body .custom-note-theme.pattern-checkerboard .cm-scroller .cm-content {
     background: rgba(11, 0, 0, 0.75);
     border-radius: 0;
     padding-left: 24px;
@@ -276,19 +279,26 @@
 /* Recolor transparent-background images (e.g. handwritten note PNGs)
    to match the pen color using an inline SVG feFlood+feComposite filter.
    Only opaque pixels (ink/text) are recolored; transparent areas stay clear. */
-.custom-note-theme img {
-    filter: var(--img-recolor-filter) !important;
+body .custom-note-theme.custom-note-theme img {
+    filter: var(--img-recolor-filter);
     transition: filter 0.3s ease;
 }
 
-.custom-note-theme img[data-original-mode="true"] {
-    filter: none !important;
+body .custom-note-theme.custom-note-theme img[data-original-mode="true"] {
+    filter: none;
 }
 
 /* Floating Image Toggle Button */
 .vibgyor-img-toggle-btn {
     position: absolute;
     display: none;
+}
+
+.vibgyor-img-toggle-btn.is-visible {
+    display: flex;
+}
+
+.vibgyor-img-toggle-btn {
     align-items: center;
     justify-content: center;
     width: 28px;

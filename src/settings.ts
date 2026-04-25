@@ -28,7 +28,7 @@ export const DEFAULT_SETTINGS: VibgyorSettings = {
         { id: "sepia-palette", name: "Sepia Palette", category: "normal", pageColor: "#f4ecd8", linkColor: "#5c4331", accentColor: "#d97742", penColor: "#433422", isPreset: true },
         { id: "nord-dark", name: "Nord Dark", category: "normal", pageColor: "#2e3440", linkColor: "#88c0d0", accentColor: "#5e81ac", penColor: "#eceff4", isPreset: true },
         { id: "neon-noir", name: "Neon Noir", category: "normal", pageColor: "#000000", linkColor: "#00e5ff", accentColor: "#ffffff", penColor: "#cfffe2", isPreset: true },
-        { id: "crimson-ember", name: "Crimson Ember", category: "normal", pageColor: "#0c0c0c", linkColor: "#ff7b54", accentColor: "#481e14", penColor: "#f2613f", isPreset: true },
+        { id: "crimson-ember", name: "Crimson Ember", category: "normal", pageColor: "#0c0c0c", linkColor: "#ff7b54", accentColor: "#c4391a", penColor: "#f2613f", isPreset: true },
         { id: "twilight-harbor", name: "Twilight Harbor", category: "normal", pageColor: "#fbe4d6", linkColor: "#4338ca", accentColor: "#261fb3", penColor: "#0c0950", isPreset: true },
         { id: "imperial-noir", name: "Imperial Noir", category: "normal", pageColor: "#121312", linkColor: "#ad0013", accentColor: "#ad0013", penColor: "#a67d43", isPreset: true },
         { id: "mint-grove", name: "Midnight Mint", category: "normal", pageColor: "#091413", linkColor: "#285a48", accentColor: "#408a71", penColor: "#b0e4cc", isPreset: true }

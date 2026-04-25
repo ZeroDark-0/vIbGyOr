@@ -40,20 +40,33 @@ export class ThemeModal extends Modal {
             const activeFile = this.app.workspace.getActiveFile();
             if (activeFile) {
                 contentEl.createEl("p", {text: `Editing theme for: ${activeFile.name}`});
-                
+
                 // Preload current frontmatter values if they exist
                 const cache = this.app.metadataCache.getFileCache(activeFile);
-                const frontmatter: any = cache?.frontmatter;
+                const frontmatter = cache?.frontmatter as Record<string, unknown> | undefined;
                 if (frontmatter) {
-                    if (frontmatter['page-color']) this.customPageColor = frontmatter['page-color'];
-                    if (frontmatter['link-color']) this.customLinkColor = frontmatter['link-color'];
-                    if (frontmatter['accent-color']) this.customAccentColor = frontmatter['accent-color'];
-                    if (frontmatter['pen-color']) this.customPenColor = frontmatter['pen-color'];
-                    if (frontmatter['page-pattern']) this.customPagePattern = frontmatter['page-pattern'];
-                    if (frontmatter['theme-id']) {
-                        this.selectedThemeId = frontmatter['theme-id'];
-                    } else if (frontmatter['theme-name']) {
-                        const theme = this.plugin.settings.themes.find(t => t.name === frontmatter['theme-name']);
+                    const gs = (key: string): string | undefined => {
+                        const val: unknown = frontmatter[key];
+                        return typeof val === 'string' ? val : undefined;
+                    };
+
+                    const pageColor = gs('page-color');
+                    const linkColor = gs('link-color');
+                    const accentColor = gs('accent-color');
+                    const penColor = gs('pen-color');
+                    const pagePattern = gs('page-pattern');
+                    const fmThemeId = gs('theme-id');
+                    const fmThemeName = gs('theme-name');
+
+                    if (pageColor) this.customPageColor = pageColor;
+                    if (linkColor) this.customLinkColor = linkColor;
+                    if (accentColor) this.customAccentColor = accentColor;
+                    if (penColor) this.customPenColor = penColor;
+                    if (pagePattern) this.customPagePattern = pagePattern;
+                    if (fmThemeId) {
+                        this.selectedThemeId = fmThemeId;
+                    } else if (fmThemeName) {
+                        const theme = this.plugin.settings.themes.find(t => t.name === fmThemeName);
                         if (theme) this.selectedThemeId = theme.id;
                     }
 
@@ -61,7 +74,7 @@ export class ThemeModal extends Modal {
                     if (this.selectedThemeId !== "custom") {
                         const theme = this.plugin.settings.themes.find(t => t.id === this.selectedThemeId);
                         if (theme) this.selectedCategory = theme.category || "normal";
-                    } else if (frontmatter['page-color']) {
+                    } else if (pageColor) {
                         this.selectedCategory = "custom";
                     }
 
@@ -281,7 +294,7 @@ export class ThemeModal extends Modal {
         if (this.isEditMode) {
             const activeFile = this.app.workspace.getActiveFile();
             if (activeFile) {
-                await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: any) => {
+                await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: Record<string, unknown>) => {
                     // Delete old properties first to help with cleanup/ordering
                     const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'theme-images'];
                     keysToDelete.forEach(k => delete frontmatter[k]);
