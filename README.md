@@ -259,7 +259,7 @@ If you enjoy vIbGyOr and want to support its development, any support means a lo
 ## Acknowledgements
 
 > [!IMPORTANT]
-> 🎨 The image recoloring feature is handled by [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their plugin some love! ⭐
+> 🎨 The image background removal feature is handled by [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their plugin some love! ⭐
 
 ---
 
