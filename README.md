@@ -30,7 +30,7 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 5. Click **Create note**
 
 <!-- GIF: Creating a themed note via ribbon icon -->
-<!-- ![Creating a themed note](assets/demo-create-note.gif) -->
+![Creating a themed note](./assets/demo-create-note.gif)
 
 ### Editing an Existing Note's Theme
 
@@ -43,7 +43,7 @@ Three ways to modify a note's appearance:
 | **Command palette** | `Edit current note theme` |
 
 <!-- GIF: Editing a note theme via ribbon + context menu -->
-<!-- ![Editing a note theme](assets/demo-edit-theme.gif) -->
+![Editing a note theme](./assets/demo-edit-theme.gif)
 
 ### Image Color Toggle
 
@@ -55,7 +55,7 @@ When a note has a theme applied, images with transparent backgrounds are automat
 The plugin remembers your choice per image across sessions.
 
 <!-- GIF: Image color toggle in action -->
-<!-- ![Image color toggle](assets/demo-image-toggle.gif) -->
+<!-- ![Image color toggle](./assets/demo-image-toggle.gif) -->
 
 ---
 
@@ -115,7 +115,7 @@ Open **Settings** → **v i b g y o r** to manage your theme library:
 - **Advanced themes** — Coming soon
 
 <!-- GIF: Settings panel walkthrough -->
-<!-- ![Settings panel](assets/demo-settings.gif) -->
+![Settings panel](./assets/demo-settings.gif)
 
 ---
 
