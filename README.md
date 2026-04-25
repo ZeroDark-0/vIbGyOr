@@ -19,6 +19,17 @@ Give each note its own personality — apply custom page colors, text colors, li
 
 ## Getting Started
 
+
+### Ribbon Icons & Usage
+The plugin provides two main entry points in your left ribbon:
+
+| Icon | Name | Purpose |
+| :--- | :--- | :--- |
+| ![paintbrush](assets/icon-brush.svg) | **Create Themed Note** | Opens a modal to name a new note and pick its initial theme/pattern. |
+| ![palette](assets/icon-palette.svg) | **Edit Active Theme** | Modifies the theme and pattern of the note you are currently viewing. |
+
+---
+
 ### Creating a Themed Note
 
 Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`) to open the creation modal:
@@ -27,35 +38,50 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 2. Pick a **theme type** — Minimal, Advanced, or Custom Palettes
 3. Choose a **preset** or define **custom colors** (page, link, accent, pen)
 4. Select a **background pattern** (optional)
-5. Click **Create note**
+5. Click **Create note** 
+  
+![Creating a themed note](assets/demo-create-note.gif)
 
-<!-- GIF: Creating a themed note via ribbon icon -->
-![Creating a themed note](./assets/demo-create-note.gif)
+---
 
 ### Editing an Existing Note's Theme
 
-Three ways to modify a note's appearance:
+1. Navigate to the **Edit active note theme** at the left sidebar.
+2. Pick the new **theme type** and the **new palette** or **custom colors**.
+3. Modify as your wish.
+4. Click on **Save theme** button to apply the changes.
 
-| Method | How |
-|:---|:---|
-| **Ribbon icon** | Click the **Palette** icon in the left sidebar |
-| **Context menu** | Right-click in the editor → **Edit note theme/pattern** |
-| **Command palette** | `Edit current note theme` |
+![Editing a note theme](assets/demo-edit-theme.gif)
 
-<!-- GIF: Editing a note theme via ribbon + context menu -->
-![Editing a note theme](./assets/demo-edit-theme.gif)
+---
+
+### Create Custom Palettes
+
+1. Navigate to the obsidian **setting tab**.
+2. Under **community plugins** search for **v i b g y o r**, hit the setting icon.
+3. Under **Custom palettes**, click **Add custom palette** name it and define your own color combinations.
+4. Navigate back to the Edit active theme tab, select Custom Palettes and use your custom colors.
+
+
+![Creating a new Palette](assets/demo-custom-theme.gif)
+
+---
 
 ### Image Color Toggle
 
-When a note has a theme applied, images with transparent backgrounds are automatically tinted to match the pen color. Hover over any image to reveal a toggle button:
+When a note has a theme applied, images with transparent backgrounds are automatically tinted to match the pen color, and if you don't have image with transparent background you can paste the default image.
+ Hover over any image to reveal a toggle button at the top-left corner of image:
 
 - Click to **view original colors**
 - Click again to **re-apply theme tinting**
 
-The plugin remembers your choice per image across sessions.
+The plugin remembers your choice per image.
 
-<!-- GIF: Image color toggle in action -->
-<!-- ![Image color toggle](./assets/demo-image-toggle.gif) -->
+![Image color toggle](assets/demo-image-toggle.gif)
+
+
+> [!IMPORTANT]
+> 🎨 The image recoloring feature works best with [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their repo some love! ⭐
 
 ---
 
@@ -114,9 +140,6 @@ Open **Settings** → **v i b g y o r** to manage your theme library:
 - **Minimal themes** — View built-in preset themes (read-only)
 - **Advanced themes** — Coming soon
 
-<!-- GIF: Settings panel walkthrough -->
-![Settings panel](./assets/demo-settings.gif)
-
 ---
 
 ## Frontmatter Reference
@@ -165,18 +188,25 @@ npm run build     # Production build
 npm run lint      # Run ESLint
 ```
 
+## Contributing
+
+Found a bug or have a suggestion? All feedback is welcome!
+
+- 🐛 **GitHub Issues:** [Having any Issues, tell me!!](https://github.com/ZeroDark-0/vIbGyOr/issues)
+- 💬 **Discord:** [Boldness](https://discordapp.com/users/659447909208686632) 
+- 💡 **Ideas & Brainstorming:** [Discussions](https://github.com/ZeroDark-0/vIbGyOr/discussions)
+- ✉️ **Email**: [Slide into my inbox](mailto:chaitanya.builds@gmail.com)
+
 ---
 
 ## Support
 
-If you enjoy this plugin and want to support its development:
+## Support
 
-<a href="https://www.buymeacoffee.com/ZeroDark" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a book&emoji=📚&slug=ZeroDark&button_colour=0400ff&font_colour=ffffff&font_family=Bree&outline_colour=ffffff&coffee_colour=FFDD00" alt="Buy me a book" /></a>
-<br>
-<iframe src="https://github.com/sponsors/ZeroDark-0/button" title="Sponsor ZeroDark-0" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
-
----
+If you enjoy vIbGyOr and want to support its development, any support means a lot! 
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ZeroDark-0?style=social)](https://github.com/sponsors/ZeroDark-0)
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/ZeroDark)
 
 ## License
 
-[MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
+MIT License -  [MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
