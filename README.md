@@ -2,7 +2,31 @@
 
 > **Customize your Obsidian notes with unique colors and patterns.**
 
+![GitHub release](https://img.shields.io/github/v/release/ZeroDark-0/vIbGyOr?color=7c3aed)
+![License](https://img.shields.io/github/license/ZeroDark-0/vIbGyOr)
+![GitHub stars](https://img.shields.io/github/stars/ZeroDark-0/vIbGyOr?style=social)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ZeroDark-0?style=social)](https://github.com/sponsors/ZeroDark-0)
+
 Give each note its own personality — apply custom page colors, text colors, link colors, accent colors, and background patterns through a simple visual interface or frontmatter properties.
+
+![Preview](./assets/demo-create-note.gif)
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Built-in Theme Presets](#built-in-theme-presets)
+- [Background Patterns](#background-patterns)
+- [Settings](#settings)
+- [Frontmatter Reference](#frontmatter-reference)
+- [Installation](#installation)
+- [Development](#development)
+- [Contributing](#contributing)
+- [Support](#support)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ---
 
@@ -19,7 +43,6 @@ Give each note its own personality — apply custom page colors, text colors, li
 
 ## Getting Started
 
-
 ### Ribbon Icons & Usage
 The plugin provides two main entry points in your left ribbon:
 
@@ -30,7 +53,8 @@ The plugin provides two main entry points in your left ribbon:
 
 ---
 
-### Creating a Themed Note
+<details>
+<summary>🎨 Creating a Themed Note</summary>
 
 Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`) to open the creation modal:
 
@@ -38,50 +62,55 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 2. Pick a **theme type** — Minimal, Advanced, or Custom Palettes
 3. Choose a **preset** or define **custom colors** (page, link, accent, pen)
 4. Select a **background pattern** (optional)
-5. Click **Create note** 
-  
-![Creating a themed note](assets/demo-create-note.gif)
+5. Click **Create note**
+
+![Creating a themed note](./assets/demo-create-note.gif)
+
+</details>
 
 ---
 
-### Editing an Existing Note's Theme
+<details>
+<summary>✏️ Editing an Existing Note's Theme</summary>
 
 1. Navigate to the **Edit active note theme** at the left sidebar.
 2. Pick the new **theme type** and the **new palette** or **custom colors**.
-3. Modify as your wish.
+3. Modify as you wish.
 4. Click on **Save theme** button to apply the changes.
 
-![Editing a note theme](assets/demo-edit-theme.gif)
+![Editing a note theme](./assets/demo-edit-theme.gif)
+
+</details>
 
 ---
 
-### Create Custom Palettes
+<details>
+<summary>🖌️ Create Custom Palettes</summary>
 
-1. Navigate to the obsidian **setting tab**.
-2. Under **community plugins** search for **v i b g y o r**, hit the setting icon.
-3. Under **Custom palettes**, click **Add custom palette** name it and define your own color combinations.
+1. Navigate to the Obsidian **Settings tab**.
+2. Under **Community plugins** search for **v i b g y o r**, hit the settings icon.
+3. Under **Custom palettes**, click **Add custom palette**, name it and define your own color combinations.
 4. Navigate back to the Edit active theme tab, select Custom Palettes and use your custom colors.
 
+![Creating a new Palette](./assets/demo-custom-theme.gif)
 
-![Creating a new Palette](assets/demo-custom-theme.gif)
+</details>
 
 ---
 
-### Image Color Toggle
+<details>
+<summary>🖼️ Image Color Toggle</summary>
 
-When a note has a theme applied, images with transparent backgrounds are automatically tinted to match the pen color, and if you don't have image with transparent background you can paste the default image.
- Hover over any image to reveal a toggle button at the top-left corner of image:
+When a note has a theme applied, images with transparent backgrounds are automatically tinted to match the pen color. Hover over any image to reveal a toggle button at the top-left corner:
 
 - Click to **view original colors**
 - Click again to **re-apply theme tinting**
 
 The plugin remembers your choice per image.
 
-![Image color toggle](assets/demo-image-toggle.gif)
+![Image color toggle](./assets/demo-image-toggle.gif)
 
-
-> [!IMPORTANT]
-> 🎨 The image recoloring feature works best with [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their repo some love! ⭐
+</details>
 
 ---
 
@@ -104,31 +133,35 @@ The plugin remembers your choice per image.
 
 ## Background Patterns
 
-Patterns are organized into three categories:
+<details>
+<summary>🗒️ Note / Paper</summary>
 
-### Note / Paper
-| Pattern | Description |
-|:---|:---|
-| Lined | Horizontal ruled lines |
-| Dotted | Evenly spaced dot grid |
-| Grid | Square grid overlay |
-| Cornell | Ruled lines with a left margin |
-| Blueprint | Fine + coarse grid (engineering style) |
+- **Lined** — Horizontal ruled lines
+- **Dotted** — Evenly spaced dot grid
+- **Grid** — Square grid overlay
+- **Cornell** — Ruled lines with a left margin
+- **Blueprint** — Fine + coarse grid (engineering style)
 
-### Geometric
-| Pattern | Description |
-|:---|:---|
-| Woven | 45° crosshatch texture |
-| Hexagonal | Sci-fi hexagonal grid |
+</details>
 
-### Artistic / Space
-| Pattern | Description |
-|:---|:---|
-| Cosmos | Scattered stars and sparkles |
-| Starfield | Dense 4-pointed star field |
-| Zen Waves | Concentric ripple circles |
-| Cyber Maze | Thick maze-like corridors |
-| Cyber Circuit | Circuit board traces with nodes |
+<details>
+<summary>📐 Geometric</summary>
+
+- **Woven** — 45° crosshatch texture
+- **Hexagonal** — Sci-fi hexagonal grid
+
+</details>
+
+<details>
+<summary>🌌 Artistic / Space</summary>
+
+- **Cosmos** — Scattered stars and sparkles
+- **Starfield** — Dense 4-pointed star field
+- **Zen Waves** — Concentric ripple circles
+- **Cyber Maze** — Thick maze-like corridors
+- **Cyber Circuit** — Circuit board traces with nodes
+
+</details>
 
 ---
 
@@ -143,6 +176,9 @@ Open **Settings** → **v i b g y o r** to manage your theme library:
 ---
 
 ## Frontmatter Reference
+
+<details>
+<summary>📄 View all frontmatter properties</summary>
 
 The plugin reads and writes these frontmatter properties:
 
@@ -160,20 +196,30 @@ grid-color: "#333333"           # Pattern grid color (optional)
 
 > **Note:** When using a preset, only `theme-name` and `page-pattern` are stored. The colors are resolved from the preset at runtime, so updating a preset automatically updates all notes using it.
 
+</details>
+
 ---
 
 ## Installation
 
-### From Obsidian Community Plugins
+<details>
+<summary>📦 From Obsidian Community Plugins</summary>
+
 1. Open **Settings** → **Community plugins** → **Browse**
 2. Search for **v i b g y o r**
 3. Click **Install**, then **Enable**
 
-### Manual Installation
+</details>
+
+<details>
+<summary>🔧 Manual Installation</summary>
+
 1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/ZeroDark-0/vIbGyOr/releases)
 2. Create a folder named `vIbGyOr` in your vault's `.obsidian/plugins/` directory
 3. Move the downloaded files into that folder
 4. Reload Obsidian and enable the plugin in **Settings** → **Community plugins**
+
+</details>
 
 ---
 
@@ -188,25 +234,35 @@ npm run build     # Production build
 npm run lint      # Run ESLint
 ```
 
+---
+
 ## Contributing
 
 Found a bug or have a suggestion? All feedback is welcome!
 
-- 🐛 **GitHub Issues:** [Having any Issues, tell me!!](https://github.com/ZeroDark-0/vIbGyOr/issues)
-- 💬 **Discord:** [Boldness](https://discordapp.com/users/659447909208686632) 
+- 🐛 **GitHub Issues:** [Having any issues, tell me!!](https://github.com/ZeroDark-0/vIbGyOr/issues)
+- 💬 **Discord:** [Boldness](https://discordapp.com/users/659447909208686632)
 - 💡 **Ideas & Brainstorming:** [Discussions](https://github.com/ZeroDark-0/vIbGyOr/discussions)
-- ✉️ **Email**: [Slide into my inbox](mailto:chaitanya.builds@gmail.com)
+- ✉️ **Email:** [Slide into my inbox](mailto:chaitanya.builds@gmail.com)
 
 ---
 
 ## Support
 
-## Support
+If you enjoy vIbGyOr and want to support its development, any support means a lot! 🙏<br>
 
-If you enjoy vIbGyOr and want to support its development, any support means a lot! 
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ZeroDark-0?style=social)](https://github.com/sponsors/ZeroDark-0)
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/ZeroDark)
 
+---
+
+## Acknowledgements
+
+> [!IMPORTANT]
+> 🎨 The image recoloring feature is handled by [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their plugin some love! ⭐
+
+---
+
 ## License
 
-MIT License -  [MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
+MIT License — [MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
