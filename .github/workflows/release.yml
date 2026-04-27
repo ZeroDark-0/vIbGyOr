@@ -24,8 +24,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ github.ref_name }}
         run: |
+          gh release delete "$VERSION" --yes || true
           gh release create "$VERSION" \
-            --overwrite \
             --title="$VERSION" \
             --draft=false \
             --prerelease=false \
