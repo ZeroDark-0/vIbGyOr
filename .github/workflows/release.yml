@@ -1,28 +1,23 @@
 name: Release Obsidian plugin
-
 on:
   push:
-    # Sequence of patterns matched against refs/tags
     tags:
-      - "*" # Push events to matching any tag format, i.e. 1.0, 20.15.10
-
+      - "*"
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18.x"
-
       - name: Build plugin
         run: |
           npm install
           npm run build
-
       - name: Create Release
         id: create_release
         env:
@@ -30,6 +25,7 @@ jobs:
           VERSION: ${{ github.ref_name }}
         run: |
           gh release create "$VERSION" \
+            --clobber \
             --title="$VERSION" \
             --draft=false \
             --prerelease=false \
