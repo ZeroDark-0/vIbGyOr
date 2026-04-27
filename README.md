@@ -7,7 +7,7 @@
 ![GitHub stars](https://img.shields.io/github/stars/ZeroDark-0/vIbGyOr?style=social)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ZeroDark-0?style=social)](https://github.com/sponsors/ZeroDark-0)
 
-Give each note its own personality — apply custom page colors, text colors, link colors, accent colors, and background patterns through a simple visual interface or frontmatter properties.
+Give each note its own personality ->  apply custom page colors, text colors, link colors, accent colors, and background patterns through a simple visual interface or frontmatter properties.
 
 ![Preview](./assets/demo-create-note.gif)
 
@@ -32,12 +32,12 @@ Give each note its own personality — apply custom page colors, text colors, li
 
 ## Features
 
-- **Per-note theming** — Set unique background, text, link, and accent colors for individual notes
-- **Background patterns** — Apply textures like Grid, Blueprint, Cosmos, Starfield, Zen Waves, and more
-- **Image color matching** — Automatically tints transparent-background images to match your note's pen color, with a one-click toggle to view originals
-- **10 built-in presets** — Ready-to-use themes including Dark Mode, Vampire, Nord Dark, Neon Noir, and more
-- **Custom palettes** — Create and save your own reusable color combinations
-- **Real-time updates** — Changes to frontmatter are applied instantly
+- **Per-note theming :** Set unique background, text, link, and accent colors for individual notes
+- **Background patterns :** Apply textures like Grid, Blueprint, Cosmos, Starfield, Zen Waves, and more
+- **Image color matching :** Automatically tints transparent-background images to match your note's pen color, with a one-click toggle to view originals
+- **10 built-in presets :** Ready-to-use themes including Dark Mode, Vampire, Nord Dark, Neon Noir, and more
+- **Custom palettes :** Create and save your own reusable color combinations
+- **Real-time updates :** Changes to frontmatter are applied instantly
 
 ---
 
@@ -59,7 +59,7 @@ The plugin provides two main entry points in your left ribbon:
 Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`) to open the creation modal:
 
 1. Enter a **note title**
-2. Pick a **theme type** — Minimal, Advanced, or Custom Palettes
+2. Pick a **theme type :** Minimal, Advanced, or Custom Palettes
 3. Choose a **preset** or define **custom colors** (page, link, accent, pen)
 4. Select a **background pattern** (optional)
 5. Click **Create note**
@@ -136,30 +136,30 @@ The plugin remembers your choice per image.
 <details>
 <summary>🗒️ Note / Paper</summary>
 
-- **Lined** — Horizontal ruled lines
-- **Dotted** — Evenly spaced dot grid
-- **Grid** — Square grid overlay
-- **Cornell** — Ruled lines with a left margin
-- **Blueprint** — Fine + coarse grid (engineering style)
+- **Lined :** Horizontal ruled lines
+- **Dotted :** Evenly spaced dot grid
+- **Grid :** Square grid overlay
+- **Cornell :** Ruled lines with a left margin
+- **Blueprint :** Fine + coarse grid (engineering style)
 
 </details>
 
 <details>
 <summary>📐 Geometric</summary>
 
-- **Woven** — 45° crosshatch texture
-- **Hexagonal** — Sci-fi hexagonal grid
+- **Woven :** 45° crosshatch texture
+- **Hexagonal :** Sci-fi hexagonal grid
 
 </details>
 
 <details>
 <summary>🌌 Artistic / Space</summary>
 
-- **Cosmos** — Scattered stars and sparkles
-- **Starfield** — Dense 4-pointed star field
-- **Zen Waves** — Concentric ripple circles
-- **Cyber Maze** — Thick maze-like corridors
-- **Cyber Circuit** — Circuit board traces with nodes
+- **Cosmos :** Scattered stars and sparkles
+- **Starfield :** Dense 4-pointed star field
+- **Zen Waves :** Concentric ripple circles
+- **Cyber Maze :** Thick maze-like corridors
+- **Cyber Circuit :** Circuit board traces with nodes
 
 </details>
 
@@ -169,10 +169,10 @@ The plugin remembers your choice per image.
 
 Open **Settings** → **v i b g y o r** to manage your theme library:
 
-- **Custom palettes** — Create, edit, and delete your own color combinations
-- **Minimal themes** — View built-in preset themes (read-only)
-- **Advanced themes** — Coming soon
-
+- **Custom palettes :** Create, edit, and delete your own color combinations
+- **Minimal themes :** View built-in preset themes (read-only)
+- **Advanced themes :** Coming soon
+- **Glassmorphism theme :** Coming soon
 ---
 
 ## Frontmatter Reference
@@ -249,7 +249,7 @@ Found a bug or have a suggestion? All feedback is welcome!
 
 ## Support
 
-If you enjoy vIbGyOr and want to support its development, any support means a lot! 🙏<br>
+If you enjoy vIbGyOr and want to support its development, any support means a lot! <br>
 
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ZeroDark-0?style=social)](https://github.com/sponsors/ZeroDark-0)
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="BuyMeACoffee" width="100">](https://www.buymeacoffee.com/ZeroDark)
@@ -259,10 +259,10 @@ If you enjoy vIbGyOr and want to support its development, any support means a lo
 ## Acknowledgements
 
 > [!IMPORTANT]
-> 🎨 The image background removal feature is handled by [Inkporter](https://github.com/AmadeussSystem/Inkporter) — a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their plugin some love! ⭐
+> 🎨 The image background removal feature is handled by [Inkporter](https://github.com/AmadeussSystem/Inkporter) -> a fantastic plugin by AmadeussSystem. If you enjoy that feature, go show their plugin some love! ⭐
 
 ---
 
 ## License
 
-MIT License — [MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
+MIT License -> [MIT](LICENSE) © [ZeroDark-0](https://github.com/ZeroDark-0)
