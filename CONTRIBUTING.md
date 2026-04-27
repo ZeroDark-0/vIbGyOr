@@ -4,9 +4,9 @@ Thanks for your interest in contributing! 🌈
 
 ## Ways to Contribute
 
-- 🐛 **Bug Reports** — Open an issue on [GitHub Issues](https://github.com/ZeroDark-0/vIbGyOr/issues)
-- 💡 **Feature Requests** — Start a [Discussion](https://github.com/ZeroDark-0/vIbGyOr/discussions)
-- 🔧 **Pull Requests** — Fork the repo, make changes, and submit a PR
+- 🐛 **Bug Reports :** Open an issue on [GitHub Issues](https://github.com/ZeroDark-0/vIbGyOr/issues)
+- 💡 **Feature Requests :** Start a [Discussion](https://github.com/ZeroDark-0/vIbGyOr/discussions)
+- 🔧 **Pull Requests :** Fork the repo, make changes, and submit a PR
 
 ## Development Setup
 
@@ -21,7 +21,7 @@ npm run dev
 
 - Follow the existing code style
 - Run `npm run lint` before submitting
-- Keep changes focused — one feature/fix per PR
+- Keep changes focused : one feature/fix per PR
 - Update the README if needed
 
 ## Contact
