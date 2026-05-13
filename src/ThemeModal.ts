@@ -244,7 +244,8 @@ export class ThemeModal extends Modal {
         if (value === "custom") {
             if (pgSetting) {
                 pgSetting.nameEl.innerText = "Custom theme colors";
-                pgSetting.settingEl.setCssProps({ "pointer-events": "auto", "opacity": "1" });
+                pgSetting.settingEl.style.setProperty("pointer-events", "auto");
+                pgSetting.settingEl.style.setProperty("opacity", "1");
             }
             if (cPage !== null) cPage.setValue(this.customPageColor);
             if (cLink !== null) cLink.setValue(this.customLinkColor);
@@ -255,7 +256,8 @@ export class ThemeModal extends Modal {
             const theme = this.plugin.settings.themes.find(t => t.id === value);
             if (theme && pgSetting) {
                 pgSetting.nameEl.innerText = "Preset preview (read-only)";
-                pgSetting.settingEl.setCssProps({ "pointer-events": "none", "opacity": "0.5" });
+                pgSetting.settingEl.style.setProperty("pointer-events", "none");
+                pgSetting.settingEl.style.setProperty("opacity", "0.5");
                 if (cPage !== null) cPage.setValue(theme.pageColor);
                 if (cLink !== null) cLink.setValue(theme.linkColor);
                 if (cAcc !== null) cAcc.setValue(theme.accentColor);

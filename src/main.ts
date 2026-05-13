@@ -114,16 +114,16 @@ export default class VibgyorPlugin extends Plugin {
 	}
 
 	setupImageToggle() {
-		this.toggleBtn = document.createElement('div');
+		this.toggleBtn = activeDocument.createElement('div');
 		const toggleBtn = this.toggleBtn;
 		toggleBtn.classList.add('vibgyor-img-toggle-btn');
 		setIcon(toggleBtn, 'arrow-up-down');
 		toggleBtn.title = 'Toggle image colors';
-		document.body.appendChild(toggleBtn);
+		activeDocument.body.appendChild(toggleBtn);
 
 		let currentImg: HTMLImageElement | null = null;
 
-		this.registerDomEvent(document, 'mouseover', (e: MouseEvent) => {
+		this.registerDomEvent(activeDocument, 'mouseover', (e: MouseEvent) => {
 			const target = e.target as HTMLElement;
 			if (target.tagName === 'IMG' && target.closest('.custom-note-theme')) {
 				const img = target as HTMLImageElement;
@@ -144,7 +144,7 @@ export default class VibgyorPlugin extends Plugin {
 			}
 		});
 
-		this.registerDomEvent(document, 'scroll', () => {
+		this.registerDomEvent(activeDocument, 'scroll', () => {
 			if (currentImg && toggleBtn.classList.contains('is-visible')) {
 				const rect = currentImg.getBoundingClientRect();
 				if (rect.top > window.innerHeight || rect.bottom < 0 || rect.left > window.innerWidth || rect.right < 0) {
@@ -195,7 +195,7 @@ export default class VibgyorPlugin extends Plugin {
 
 	applyThemeToLeaf(file: TFile) {
 		// Wait a brief moment to ensure the DOM is ready for styles
-		setTimeout(() => {
+		window.setTimeout(() => {
 			const cache = this.app.metadataCache.getFileCache(file);
 			const frontmatter = (cache?.frontmatter ?? {}) as Record<string, unknown>;
 			const gs = (key: string) => this.getFrontmatterString(frontmatter, key);
