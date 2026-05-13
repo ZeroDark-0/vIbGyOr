@@ -27,4 +27,4 @@ npm run dev
 ## Contact
 
 - 💬 Discord: [Boldness](https://discordapp.com/users/659447909208686632)
-- ✉️ Email: [Slide me a mail](mailto:chaitanya.builds@gmail.com)
+- ✉️ Email: [Slide me a mail](mailto:zerodark.hopium@gmail.com)

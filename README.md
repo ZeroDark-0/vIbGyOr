@@ -243,7 +243,7 @@ Found a bug or have a suggestion? All feedback is welcome!
 - 🐛 **GitHub Issues:** [Having any issues, tell me!!](https://github.com/ZeroDark-0/vIbGyOr/issues)
 - 💬 **Discord:** [Boldness](https://discordapp.com/users/659447909208686632)
 - 💡 **Ideas & Brainstorming:** [Discussions](https://github.com/ZeroDark-0/vIbGyOr/discussions)
-- ✉️ **Email:** [Slide into my inbox](mailto:chaitanya.builds@gmail.com)
+- ✉️ **Email:** [Slide into my inbox](mailto:zerodark.hopium@gmail.com)
 
 ---
 
