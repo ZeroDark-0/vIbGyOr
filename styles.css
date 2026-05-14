@@ -243,6 +243,12 @@ body .custom-note-theme.pattern-checkerboard .cm-scroller .cm-content {
     transform: scaleY(1.8);
 }
 
+/* Theme Preview — Read-only state for preset preview */
+.theme-preview-readonly {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 /* Empty State */
 .theme-empty-state {
     color: var(--text-muted);
