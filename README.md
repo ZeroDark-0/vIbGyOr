@@ -171,8 +171,7 @@ Open **Settings** → **v i b g y o r** to manage your theme library:
 
 - **Custom palettes :** Create, edit, and delete your own color combinations
 - **Minimal themes :** View built-in preset themes (read-only)
-- **Advanced themes :** Coming soon
-- **Glassmorphism theme :** Coming soon
+
 ---
 
 ## Frontmatter Reference

@@ -298,13 +298,6 @@ body .custom-note-theme.custom-note-theme img[data-original-mode="true"] {
 .vibgyor-img-toggle-btn {
     position: absolute;
     display: none;
-}
-
-.vibgyor-img-toggle-btn.is-visible {
-    display: flex;
-}
-
-.vibgyor-img-toggle-btn {
     align-items: center;
     justify-content: center;
     width: 28px;
@@ -318,6 +311,10 @@ body .custom-note-theme.custom-note-theme img[data-original-mode="true"] {
     font-size: 14px;
     transition: transform 0.1s ease, background 0.1s ease;
     user-select: none;
+}
+
+.vibgyor-img-toggle-btn.is-visible {
+    display: flex;
 }
 
 .vibgyor-img-toggle-btn:hover {
