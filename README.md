@@ -13,23 +13,6 @@ Give each note its own personality ->  apply custom page colors, text colors, li
 
 ---
 
-## Table of Contents
-
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Built-in Theme Presets](#built-in-theme-presets)
-- [Background Patterns](#background-patterns)
-- [Settings](#settings)
-- [Frontmatter Reference](#frontmatter-reference)
-- [Installation](#installation)
-- [Development](#development)
-- [Contributing](#contributing)
-- [Support](#support)
-- [Acknowledgements](#acknowledgements)
-- [License](#license)
-
----
-
 ## Features
 
 - **Per-note theming :** Set unique background, text, link, and accent colors for individual notes
@@ -53,8 +36,7 @@ The plugin provides two main entry points in your left ribbon:
 
 ---
 
-<details>
-<summary>🎨 Creating a Themed Note</summary>
+### 🎨 Creating a Themed Note
 
 Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`) to open the creation modal:
 
@@ -66,12 +48,9 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 
 ![Creating a themed note](./assets/demo-create-note.gif)
 
-</details>
-
 ---
 
-<details>
-<summary>✏️ Editing an Existing Note's Theme</summary>
+### ✏️ Editing an Existing Note's Theme
 
 1. Navigate to the **Edit active note theme** at the left sidebar.
 2. Pick the new **theme type** and the **new palette** or **custom colors**.
@@ -80,12 +59,9 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 
 ![Editing a note theme](./assets/demo-edit-theme.gif)
 
-</details>
-
 ---
 
-<details>
-<summary>🖌️ Create Custom Palettes</summary>
+### 🖌️ Create Custom Palettes
 
 1. Navigate to the Obsidian **Settings tab**.
 2. Under **Community plugins** search for **v i b g y o r**, hit the settings icon.
@@ -94,12 +70,9 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 
 ![Creating a new Palette](./assets/demo-custom-theme.gif)
 
-</details>
-
 ---
 
-<details>
-<summary>🖼️ Image Color Toggle</summary>
+### 🖼️ Image Color Toggle
 
 When a note has a theme applied, images with transparent backgrounds are automatically tinted to match the pen color. Hover over any image to reveal a toggle button at the top-left corner:
 
@@ -109,8 +82,6 @@ When a note has a theme applied, images with transparent backgrounds are automat
 The plugin remembers your choice per image.
 
 ![Image color toggle](./assets/demo-image-toggle.gif)
-
-</details>
 
 ---
 
@@ -133,8 +104,7 @@ The plugin remembers your choice per image.
 
 ## Background Patterns
 
-<details>
-<summary>🗒️ Note / Paper</summary>
+### 🗒️ Note / Paper
 
 - **Lined :** Horizontal ruled lines
 - **Dotted :** Evenly spaced dot grid
@@ -142,26 +112,18 @@ The plugin remembers your choice per image.
 - **Cornell :** Ruled lines with a left margin
 - **Blueprint :** Fine + coarse grid (engineering style)
 
-</details>
-
-<details>
-<summary>📐 Geometric</summary>
+### 📐 Geometric
 
 - **Woven :** 45° crosshatch texture
 - **Hexagonal :** Sci-fi hexagonal grid
 
-</details>
-
-<details>
-<summary>🌌 Artistic / Space</summary>
+### 🌌 Artistic / Space
 
 - **Cosmos :** Scattered stars and sparkles
 - **Starfield :** Dense 4-pointed star field
 - **Zen Waves :** Concentric ripple circles
 - **Cyber Maze :** Thick maze-like corridors
 - **Cyber Circuit :** Circuit board traces with nodes
-
-</details>
 
 ---
 
@@ -175,9 +137,6 @@ Open **Settings** → **v i b g y o r** to manage your theme library:
 ---
 
 ## Frontmatter Reference
-
-<details>
-<summary>📄 View all frontmatter properties</summary>
 
 The plugin reads and writes these frontmatter properties:
 
@@ -195,30 +154,22 @@ grid-color: "#333333"           # Pattern grid color (optional)
 
 > **Note:** When using a preset, only `theme-name` and `page-pattern` are stored. The colors are resolved from the preset at runtime, so updating a preset automatically updates all notes using it.
 
-</details>
-
 ---
 
 ## Installation
 
-<details>
-<summary>📦 From Obsidian Community Plugins</summary>
+### 📦 From Obsidian Community Plugins
 
 1. Open **Settings** → **Community plugins** → **Browse**
 2. Search for **v i b g y o r**
 3. Click **Install**, then **Enable**
 
-</details>
-
-<details>
-<summary>🔧 Manual Installation</summary>
+### 🔧 Manual Installation
 
 1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/ZeroDark-0/vIbGyOr/releases)
 2. Create a folder named `vIbGyOr` in your vault's `.obsidian/plugins/` directory
 3. Move the downloaded files into that folder
 4. Reload Obsidian and enable the plugin in **Settings** → **Community plugins**
-
-</details>
 
 ---
 
