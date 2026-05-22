@@ -1,4 +1,4 @@
-# Contributing to v i b g y o r
+# Contributing to vibgyor
 
 Thanks for your interest in contributing! 🌈
 

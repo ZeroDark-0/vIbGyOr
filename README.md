@@ -1,6 +1,6 @@
-# v i b g y o r
+# vibgyor
 
-> **Customize your Obsidian notes with unique colors and patterns.**
+> **Customize your Obsidian notes with custom color palettes and built-in background patterns.**
 
 ![GitHub release](https://img.shields.io/github/v/release/ZeroDark-0/vIbGyOr?color=7c3aed)
 ![License](https://img.shields.io/github/license/ZeroDark-0/vIbGyOr)
@@ -64,7 +64,7 @@ Use the **Paintbrush** ribbon icon or the command palette (`Create themed note`)
 ### 🖌️ Create Custom Palettes
 
 1. Navigate to the Obsidian **Settings tab**.
-2. Under **Community plugins** search for **v i b g y o r**, hit the settings icon.
+2. Under **Community plugins** search for **vibgyor**, hit the settings icon.
 3. Under **Custom palettes**, click **Add custom palette**, name it and define your own color combinations.
 4. Navigate back to the Edit active theme tab, select Custom Palettes and use your custom colors.
 
@@ -129,7 +129,7 @@ The plugin remembers your choice per image.
 
 ## Settings
 
-Open **Settings** → **v i b g y o r** to manage your theme library:
+Open **Settings** → **vibgyor** to manage your theme library:
 
 - **Custom palettes :** Create, edit, and delete your own color combinations
 - **Minimal themes :** View built-in preset themes (read-only)
@@ -161,7 +161,7 @@ grid-color: "#333333"           # Pattern grid color (optional)
 ### 📦 From Obsidian Community Plugins
 
 1. Open **Settings** → **Community plugins** → **Browse**
-2. Search for **v i b g y o r**
+2. Search for **vibgyor**
 3. Click **Install**, then **Enable**
 
 ### 🔧 Manual Installation
