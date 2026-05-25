@@ -98,6 +98,7 @@ export default class VibgyorPlugin extends Plugin {
 			if (view.containerEl) {
 				view.containerEl.style.removeProperty('--note-page-color');
 				view.containerEl.style.removeProperty('--note-pen-color');
+				view.containerEl.style.removeProperty('--note-pattern-color');
 				view.containerEl.style.removeProperty('--note-link-color');
 				view.containerEl.style.removeProperty('--note-accent-color');
 				view.containerEl.style.removeProperty('--note-grid-color');
@@ -214,6 +215,7 @@ export default class VibgyorPlugin extends Plugin {
 					let acc = gs('accent-color');
 					let pat = gs('page-pattern');
 					let gridCol = gs('grid-color');
+					let patCol = gs('pattern-color');
 
 					const themeId = gs('theme-id');
 					const themeName = gs('theme-name');
@@ -228,6 +230,7 @@ export default class VibgyorPlugin extends Plugin {
 							lnk = lnk || theme.linkColor;
 							acc = acc || theme.accentColor;
 							pat = pat || theme.pagePattern;
+							patCol = patCol || theme.patternColor;
 							gridCol = gridCol || theme.gridColor;
 						}
 					}
@@ -235,6 +238,7 @@ export default class VibgyorPlugin extends Plugin {
 					if (pg) {
 						view.containerEl.style.setProperty('--note-page-color', pg);
 						view.containerEl.style.setProperty('--note-pen-color', pen || 'inherit');
+						view.containerEl.style.setProperty('--note-pattern-color', patCol || pen || 'inherit');
 						view.containerEl.style.setProperty('--note-link-color', lnk || 'var(--text-a)');
 						view.containerEl.style.setProperty('--note-accent-color', acc || 'var(--text-accent)');
 						if (gridCol) {
@@ -251,14 +255,14 @@ export default class VibgyorPlugin extends Plugin {
 
 							// Dynamic SVG Injection for Cosmos
 							if (pattern === 'cosmos') {
-								const penColor = pen || '#ffffff';
+								const penColor = patCol || pen || '#ffffff';
 								const penHex = penColor.replace('#', '%23');
 								const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><circle cx='20' cy='20' r='2' fill='${penHex}' fill-opacity='0.2'/><circle cx='80' cy='40' r='3' fill='${penHex}' fill-opacity='0.15'/><circle cx='50' cy='80' r='1.5' fill='${penHex}' fill-opacity='0.3'/><path d='M70 15 L72 10 L74 15 L79 17 L74 19 L72 24 L70 19 L65 17 Z' fill='${penHex}' fill-opacity='0.25'/><circle cx='10' cy='60' r='1.5' fill='${penHex}' fill-opacity='0.25'/></svg>`;
 								view.containerEl.style.setProperty('--dynamic-svg', `url("${svgStr}")`);
 							}
 							// Dynamic SVG Injection for Stars
 							else if (pattern === 'stars') {
-								const penColor = pen || '#ffffff';
+								const penColor = patCol || pen || '#ffffff';
 								const c = penColor.replace('#', '%23');
 								// 4-pointed star path helper
 								const sp = (cx: number, cy: number, s: number, op: number) => {
@@ -288,7 +292,7 @@ export default class VibgyorPlugin extends Plugin {
 							}
 							// Dynamic SVG Injection for Zen Waves
 							else if (pattern === 'waves') {
-								const penColor = pen || '#ffffff';
+								const penColor = patCol || pen || '#ffffff';
 								const c = penColor.replace('#', '%23');
 								const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' width='100' height='50'>` +
 									`<circle cx='50' cy='50' r='40' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
@@ -308,7 +312,7 @@ export default class VibgyorPlugin extends Plugin {
 							}
 							// Dynamic SVG Injection for Cyber Maze
 							else if (pattern === 'maze') {
-								const penColor = pen || '#ffffff';
+								const penColor = patCol || pen || '#ffffff';
 								const c = penColor.replace('#', '%23');
 								const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' width='200' height='200'>` +
 									`<path d='M0 20 L40 20 L40 60 L10 60 L10 100 L60 100 L60 40 L100 40 L100 0 M120 0 L120 60 L80 60 L80 120 L20 120 L20 160 L80 160 L80 200 M140 200 L140 140 L100 140 L100 80 L160 80 L160 120 L200 120 M200 160 L160 160 L160 200 M0 180 L40 180 L40 140 L0 140 M180 0 L180 40 L140 40 L140 60 L200 60' fill='none' stroke='${c}' stroke-width='12' stroke-linecap='square' stroke-linejoin='miter' stroke-opacity='0.15'/>` +
@@ -318,7 +322,7 @@ export default class VibgyorPlugin extends Plugin {
 							}
 							// Dynamic SVG Injection for Cyber Circuit
 							else if (pattern === 'circuit') {
-								const penColor = pen || '#ffffff';
+								const penColor = patCol || pen || '#ffffff';
 								const c = penColor.replace('#', '%23');
 								const svgStr = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'>` +
 									`<path d='M0 50 L30 50 L40 60 L40 100 M60 0 L60 40 L70 50 L100 50 M20 0 L20 20 L30 30 L70 30 L80 20 L80 0 M0 80 L20 80 L30 70 L70 70 L80 80 L80 100' fill='none' stroke='${c}' stroke-width='2' stroke-opacity='0.15'/>` +
@@ -354,6 +358,7 @@ export default class VibgyorPlugin extends Plugin {
 						// If no theme properties, revert to default Obsidian behavior
 						view.containerEl.style.removeProperty('--note-page-color');
 						view.containerEl.style.removeProperty('--note-pen-color');
+						view.containerEl.style.removeProperty('--note-pattern-color');
 						view.containerEl.style.removeProperty('--note-link-color');
 						view.containerEl.style.removeProperty('--note-accent-color');
 						view.containerEl.style.removeProperty('--note-grid-color');

@@ -10,6 +10,7 @@ export interface ThemeEntry {
     accentColor: string;
     penColor: string;
     pagePattern?: string;
+    patternColor?: string;
     gridColor?: string;
     isPreset?: boolean;
 }

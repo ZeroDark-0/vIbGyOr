@@ -10,6 +10,7 @@ export class ThemeModal extends Modal {
     customAccentColor: string = "#ff9900";
     customPenColor: string = "#000000";
     customPagePattern: string = "none";
+    customPatternColor: string = "";
     selectedCategory: string = "";
     selectedPatternCategory: string = "";
     isEditMode: boolean = false;
@@ -63,6 +64,8 @@ export class ThemeModal extends Modal {
                     if (accentColor) this.customAccentColor = accentColor;
                     if (penColor) this.customPenColor = penColor;
                     if (pagePattern) this.customPagePattern = pagePattern;
+                    const patternColor = gs('pattern-color');
+                    if (patternColor) this.customPatternColor = patternColor;
                     if (fmThemeId) {
                         this.selectedThemeId = fmThemeId;
                     } else if (fmThemeName) {
@@ -222,8 +225,27 @@ export class ThemeModal extends Modal {
                     .setClass("theme-dropdown-setting")
                     .addDropdown(d => {
                         patDropdown = d;
-                        d.addOptions(patternOptions).setValue(this.customPagePattern).onChange(v => this.customPagePattern = v);
+                        d.addOptions(patternOptions).setValue(this.customPagePattern).onChange(v => {
+                            this.customPagePattern = v;
+                            this.renderThemeSelection(containerEl);
+                        });
                     });
+
+                // Pattern color picker — only show when a pattern is selected
+                if (this.customPagePattern && this.customPagePattern !== "none") {
+                    new Setting(containerEl).setName("Pattern color")
+                        .setDesc("Override the pattern color. Leave empty to use pen color.")
+                        .addColorPicker(c => {
+                            c.setValue(this.customPatternColor || this.customPenColor);
+                            c.onChange(v => this.customPatternColor = v);
+                        })
+                        .addButton(btn => btn
+                            .setButtonText("Reset")
+                            .onClick(() => {
+                                this.customPatternColor = "";
+                                this.renderThemeSelection(containerEl);
+                            }));
+                }
             }
 
             // Initialize preview based on current selection
@@ -277,6 +299,7 @@ export class ThemeModal extends Modal {
         let pg = this.customPageColor, lnk = this.customLinkColor;
         let acc = this.customAccentColor, pen = this.customPenColor;
         let pat = this.customPagePattern;
+        let patternCol = this.customPatternColor;
         let gridCol = "";
 
         let themeName = "Custom Colors";
@@ -287,6 +310,7 @@ export class ThemeModal extends Modal {
                 pg = theme.pageColor; lnk = theme.linkColor;
                 acc = theme.accentColor; pen = theme.penColor;
                 if (theme.pagePattern) pat = theme.pagePattern;
+                if (theme.patternColor) patternCol = patternCol || theme.patternColor;
                 if (theme.gridColor) gridCol = theme.gridColor;
             }
         }
@@ -296,12 +320,13 @@ export class ThemeModal extends Modal {
             if (activeFile) {
                 await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: Record<string, unknown>) => {
                     // Delete old properties first to help with cleanup/ordering
-                    const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'theme-images'];
+                    const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'pattern-color', 'theme-images'];
                     keysToDelete.forEach(k => delete frontmatter[k]);
 
                     // Set properties in desired order: 1. theme-name, 2. page-pattern
                     frontmatter['theme-name'] = themeName;
                     frontmatter['page-pattern'] = pat;
+                    if (patternCol) frontmatter['pattern-color'] = patternCol;
 
                     // If custom, we still need the colors to function
                     if (this.selectedThemeId === "custom") {
@@ -325,6 +350,7 @@ export class ThemeModal extends Modal {
             let fileContent = `---\n`;
             fileContent += `theme-name: "${themeName}"\n`;
             fileContent += `page-pattern: "${pat}"\n`;
+            if (patternCol) fileContent += `pattern-color: "${patternCol}"\n`;
             
             if (this.selectedThemeId === "custom") {
                 fileContent += `page-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\n`;
