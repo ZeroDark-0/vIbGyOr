@@ -69,20 +69,20 @@ body .custom-note-theme.custom-note-theme .markdown-rendered a {
 
 body .custom-note-theme.pattern-lined .markdown-reading-view,
 body .custom-note-theme.pattern-lined .cm-scroller {
-    background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pen-color) 35%, transparent) 30px);
+    background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 30px);
 }
 
 body .custom-note-theme.pattern-dotted .markdown-reading-view,
 body .custom-note-theme.pattern-dotted .cm-scroller {
-    background-image: radial-gradient(color-mix(in srgb, var(--note-pen-color) 45%, transparent) 1.5px, transparent 1.5px);
+    background-image: radial-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 45%, transparent) 1.5px, transparent 1.5px);
     background-size: 30px 30px;
 }
 
 body .custom-note-theme.pattern-grid .markdown-reading-view,
 body .custom-note-theme.pattern-grid .cm-scroller {
     background-image: 
-        linear-gradient(color-mix(in srgb, var(--note-pen-color) 25%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 25%, transparent) 1px, transparent 1px);
+        linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
@@ -90,7 +90,7 @@ body .custom-note-theme.pattern-grid .cm-scroller {
 body .custom-note-theme.pattern-cornell .markdown-reading-view,
 body .custom-note-theme.pattern-cornell .cm-scroller {
     background-image: 
-        repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pen-color) 35%, transparent) 30px),
+        repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 30px),
         linear-gradient(90deg, transparent 79px, color-mix(in srgb, var(--note-accent-color) 60%, transparent) 80.5px, transparent 82px);
     background-attachment: local;
 }
@@ -99,10 +99,10 @@ body .custom-note-theme.pattern-cornell .cm-scroller {
 body .custom-note-theme.pattern-blueprint .markdown-reading-view,
 body .custom-note-theme.pattern-blueprint .cm-scroller {
     background-image: 
-        linear-gradient(color-mix(in srgb, var(--note-pen-color) 30%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 30%, transparent) 1px, transparent 1px),
-        linear-gradient(color-mix(in srgb, var(--note-pen-color) 10%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 10%, transparent) 1px, transparent 1px);
+        linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 30%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 30%, transparent) 1px, transparent 1px),
+        linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 10%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 10%, transparent) 1px, transparent 1px);
     background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
     background-attachment: local;
 }
@@ -111,8 +111,8 @@ body .custom-note-theme.pattern-blueprint .cm-scroller {
 body .custom-note-theme.pattern-woven .markdown-reading-view,
 body .custom-note-theme.pattern-woven .cm-scroller {
     background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 11px),
-        repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 10px, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 11px);
+        repeating-linear-gradient(45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px),
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px);
     background-attachment: local;
 }
 
@@ -122,9 +122,9 @@ body .custom-note-theme.pattern-woven .cm-scroller {
 body .custom-note-theme.pattern-hexagonal .markdown-reading-view,
 body .custom-note-theme.pattern-hexagonal .cm-scroller {
     background-image: 
-        linear-gradient(30deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px),
-        linear-gradient(150deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px),
-        linear-gradient(90deg, color-mix(in srgb, var(--note-pen-color) 15%, transparent) 1px, transparent 1px);
+        linear-gradient(30deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px),
+        linear-gradient(150deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px);
     background-size: 40px 69.28px; 
     background-attachment: local;
 }
@@ -148,7 +148,7 @@ body .custom-note-theme.pattern-circuit .cm-scroller {
 /* 6. Checkerboard — uses --note-grid-color for the squares */
 body .custom-note-theme.pattern-checkerboard .markdown-reading-view,
 body .custom-note-theme.pattern-checkerboard .cm-scroller {
-    background-image: conic-gradient(from 90deg at 50% 50%, var(--note-grid-color, var(--note-pen-color)) 90deg, transparent 90deg 180deg, var(--note-grid-color, var(--note-pen-color)) 180deg 270deg, transparent 270deg);
+    background-image: conic-gradient(from 90deg at 50% 50%, var(--note-grid-color, var(--note-pattern-color, var(--note-pen-color))) 90deg, transparent 90deg 180deg, var(--note-grid-color, var(--note-pattern-color, var(--note-pen-color))) 180deg 270deg, transparent 270deg);
     background-size: 30px 30px;
     background-attachment: local;
 }
