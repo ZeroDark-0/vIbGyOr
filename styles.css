@@ -69,14 +69,16 @@ body .custom-note-theme.custom-note-theme .markdown-rendered a {
 
 body .custom-note-theme.pattern-lined .markdown-reading-view,
 body .custom-note-theme.pattern-lined .cm-scroller {
-    background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 30px);
+    --pattern-size: calc(30px * var(--note-pattern-scale, 1));
+    background-image: linear-gradient(transparent calc(100% - 1px), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 1px);
+    background-size: 100% var(--pattern-size);
     background-attachment: local;
 }
 
 body .custom-note-theme.pattern-dotted .markdown-reading-view,
 body .custom-note-theme.pattern-dotted .cm-scroller {
-    background-image: radial-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 45%, transparent) 1.5px, transparent 1.5px);
-    background-size: 30px 30px;
+    background-image: radial-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 45%, transparent) calc(1.5px * var(--note-pattern-scale, 1)), transparent calc(1.5px * var(--note-pattern-scale, 1)));
+    background-size: calc(30px * var(--note-pattern-scale, 1)) calc(30px * var(--note-pattern-scale, 1));
     background-attachment: local;
 }
 
@@ -85,38 +87,46 @@ body .custom-note-theme.pattern-grid .cm-scroller {
     background-image: 
         linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px);
-    background-size: 30px 30px;
+    background-size: calc(30px * var(--note-pattern-scale, 1)) calc(30px * var(--note-pattern-scale, 1));
     background-attachment: local;
 }
 
 /* 1. Cornell (Lines + Margin) */
 body .custom-note-theme.pattern-cornell .markdown-reading-view,
 body .custom-note-theme.pattern-cornell .cm-scroller {
+    --pattern-size: calc(30px * var(--note-pattern-scale, 1));
+    --margin-pos: calc(80px * var(--note-pattern-scale, 1));
     background-image: 
-        repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 30px),
-        linear-gradient(90deg, transparent 79px, color-mix(in srgb, var(--note-accent-color) 60%, transparent) 80.5px, transparent 82px);
+        linear-gradient(transparent calc(100% - 1px), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 1px),
+        linear-gradient(90deg, transparent calc(var(--margin-pos) - 1px), color-mix(in srgb, var(--note-accent-color) 60%, transparent) calc(var(--margin-pos) - 0.5px), color-mix(in srgb, var(--note-accent-color) 60%, transparent) calc(var(--margin-pos) + 1px), transparent calc(var(--margin-pos) + 1.5px));
+    background-size: 100% var(--pattern-size), 100% 100%;
     background-attachment: local;
 }
 
 /* 2. Blueprint (Thick grids + thin grids) */
 body .custom-note-theme.pattern-blueprint .markdown-reading-view,
 body .custom-note-theme.pattern-blueprint .cm-scroller {
+    --pattern-size: calc(50px * var(--note-pattern-scale, 1));
+    --subpattern-size: calc(10px * var(--note-pattern-scale, 1));
     background-image: 
         linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 30%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 30%, transparent) 1px, transparent 1px),
         linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 10%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 10%, transparent) 1px, transparent 1px);
-    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-size: var(--pattern-size) var(--pattern-size), var(--pattern-size) var(--pattern-size), var(--subpattern-size) var(--subpattern-size), var(--subpattern-size) var(--subpattern-size);
     background-attachment: local;
 }
 
 /* 3. Woven / Crosshatch */
 body .custom-note-theme.pattern-woven .markdown-reading-view,
 body .custom-note-theme.pattern-woven .cm-scroller {
+    --pattern-size: calc(15.56px * var(--note-pattern-scale, 1));
+    --stop1: calc(10px * var(--note-pattern-scale, 1));
+    --stop2: calc(11px * var(--note-pattern-scale, 1));
     background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px),
-        repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px);
-    background-size: 15.56px 15.56px;
+        repeating-linear-gradient(45deg, transparent, transparent var(--stop1), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) var(--stop1), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) var(--stop2)),
+        repeating-linear-gradient(-45deg, transparent, transparent var(--stop1), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) var(--stop1), color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) var(--stop2));
+    background-size: var(--pattern-size) var(--pattern-size);
     background-attachment: local;
 }
 
@@ -125,27 +135,54 @@ body .custom-note-theme.pattern-woven .cm-scroller {
 /* 5. Sci-Fi Hexagonal */
 body .custom-note-theme.pattern-hexagonal .markdown-reading-view,
 body .custom-note-theme.pattern-hexagonal .cm-scroller {
+    --pattern-width: calc(40px * var(--note-pattern-scale, 1));
+    --pattern-height: calc(69.28px * var(--note-pattern-scale, 1));
     background-image: 
         linear-gradient(30deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px),
         linear-gradient(150deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 1px, transparent 1px);
-    background-size: 40px 69.28px; 
+    background-size: var(--pattern-width) var(--pattern-height); 
     background-attachment: local;
 }
 
 /* --- Cosmos & Stars Patterns (dynamic SVG) --- */
 body .custom-note-theme.pattern-cosmos .markdown-reading-view,
-body .custom-note-theme.pattern-cosmos .cm-scroller,
+body .custom-note-theme.pattern-cosmos .cm-scroller {
+    background-image: var(--dynamic-svg);
+    background-repeat: repeat;
+    background-size: calc(100px * var(--note-pattern-scale, 1)) calc(100px * var(--note-pattern-scale, 1));
+    background-attachment: local;
+}
+
 body .custom-note-theme.pattern-stars .markdown-reading-view,
-body .custom-note-theme.pattern-stars .cm-scroller,
+body .custom-note-theme.pattern-stars .cm-scroller {
+    background-image: var(--dynamic-svg);
+    background-repeat: repeat;
+    background-size: calc(300px * var(--note-pattern-scale, 1)) calc(300px * var(--note-pattern-scale, 1));
+    background-attachment: local;
+}
+
 body .custom-note-theme.pattern-waves .markdown-reading-view,
-body .custom-note-theme.pattern-waves .cm-scroller,
+body .custom-note-theme.pattern-waves .cm-scroller {
+    background-image: var(--dynamic-svg);
+    background-repeat: repeat;
+    background-size: calc(100px * var(--note-pattern-scale, 1)) calc(50px * var(--note-pattern-scale, 1));
+    background-attachment: local;
+}
+
 body .custom-note-theme.pattern-maze .markdown-reading-view,
-body .custom-note-theme.pattern-maze .cm-scroller,
+body .custom-note-theme.pattern-maze .cm-scroller {
+    background-image: var(--dynamic-svg);
+    background-repeat: repeat;
+    background-size: calc(200px * var(--note-pattern-scale, 1)) calc(200px * var(--note-pattern-scale, 1));
+    background-attachment: local;
+}
+
 body .custom-note-theme.pattern-circuit .markdown-reading-view,
 body .custom-note-theme.pattern-circuit .cm-scroller {
     background-image: var(--dynamic-svg);
     background-repeat: repeat;
+    background-size: calc(100px * var(--note-pattern-scale, 1)) calc(100px * var(--note-pattern-scale, 1));
     background-attachment: local;
 }
 
@@ -153,7 +190,7 @@ body .custom-note-theme.pattern-circuit .cm-scroller {
 body .custom-note-theme.pattern-checkerboard .markdown-reading-view,
 body .custom-note-theme.pattern-checkerboard .cm-scroller {
     background-image: conic-gradient(from 90deg at 50% 50%, var(--note-grid-color, var(--note-pattern-color, var(--note-pen-color))) 90deg, transparent 90deg 180deg, var(--note-grid-color, var(--note-pattern-color, var(--note-pen-color))) 180deg 270deg, transparent 270deg);
-    background-size: 30px 30px;
+    background-size: calc(30px * var(--note-pattern-scale, 1)) calc(30px * var(--note-pattern-scale, 1));
     background-attachment: local;
 }
 
@@ -328,4 +365,9 @@ body .custom-note-theme.custom-note-theme img[data-original-mode="true"] {
 
 .vibgyor-img-toggle-btn:active {
     transform: scale(0.95);
+}
+
+/* Hide Vibgyor pattern-scale from Obsidian's Metadata/Properties view */
+.metadata-property[data-property-key="pattern-scale"] {
+    display: none !important;
 }

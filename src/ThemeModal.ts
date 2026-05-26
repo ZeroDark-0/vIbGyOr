@@ -1,4 +1,4 @@
-import {App, Modal, Setting, Notice, TFile, ColorComponent, DropdownComponent} from "obsidian";
+import {App, Modal, Setting, Notice, TFile, ColorComponent, DropdownComponent, SliderComponent} from "obsidian";
 import VibgyorPlugin from "./main";
 
 export class ThemeModal extends Modal {
@@ -11,6 +11,7 @@ export class ThemeModal extends Modal {
     customPenColor: string = "#000000";
     customPagePattern: string = "none";
     customPatternColor: string = "";
+    customPatternScale: number = 1.0;
     selectedCategory: string = "";
     selectedPatternCategory: string = "";
     isEditMode: boolean = false;
@@ -66,6 +67,13 @@ export class ThemeModal extends Modal {
                     if (pagePattern) this.customPagePattern = pagePattern;
                     const patternColor = gs('pattern-color');
                     if (patternColor) this.customPatternColor = patternColor;
+                    const fmPatternScale = frontmatter['pattern-scale'];
+                    if (typeof fmPatternScale === 'number') {
+                        this.customPatternScale = fmPatternScale;
+                    } else if (typeof fmPatternScale === 'string') {
+                        const parsed = parseFloat(fmPatternScale);
+                        if (!isNaN(parsed)) this.customPatternScale = parsed;
+                    }
                     if (fmThemeId) {
                         this.selectedThemeId = fmThemeId;
                     } else if (fmThemeName) {
@@ -150,6 +158,7 @@ export class ThemeModal extends Modal {
         let cAcc: ColorComponent = null!;
         let cPen: ColorComponent = null!;
         let patDropdown: DropdownComponent | null = null;
+        let patScaleSlider: SliderComponent | null = null;
 
         new Setting(containerEl)
             .setName("Theme preset")
@@ -167,7 +176,7 @@ export class ThemeModal extends Modal {
                 dropdown.onChange(value => {
                     this.selectedThemeId = value;
                     if (!isAdvancedOnly) {
-                        this.updatePreview(value, pgSetting, cPage, cLink, cAcc, cPen, patDropdown);
+                        this.updatePreview(value, pgSetting, cPage, cLink, cAcc, cPen, patDropdown, patScaleSlider);
                     }
                 });
             });
@@ -245,11 +254,32 @@ export class ThemeModal extends Modal {
                                 this.customPatternColor = "";
                                 this.renderThemeSelection(containerEl);
                             }));
+
+                    new Setting(containerEl).setName("Pattern scale")
+                        .setDesc("Adjust the size/scale of the background pattern.")
+                        .addSlider(slider => {
+                            patScaleSlider = slider;
+                            slider
+                                .setLimits(0.5, 2.5, 0.1)
+                                .setValue(this.customPatternScale)
+                                .setDynamicTooltip()
+                                .onChange(v => {
+                                    this.customPatternScale = v;
+                                });
+                        })
+                        .addButton(btn => btn
+                            .setButtonText("Reset")
+                            .onClick(() => {
+                                this.customPatternScale = 1.0;
+                                if (patScaleSlider) {
+                                    patScaleSlider.setValue(1.0);
+                                }
+                            }));
                 }
             }
 
             // Initialize preview based on current selection
-            this.updatePreview(this.selectedThemeId, pgSetting, cPage, cLink, cAcc, cPen, patDropdown);
+            this.updatePreview(this.selectedThemeId, pgSetting, cPage, cLink, cAcc, cPen, patDropdown, patScaleSlider);
         }
 
         // Create/Save Button
@@ -262,7 +292,7 @@ export class ThemeModal extends Modal {
                 }));
     }
 
-    private updatePreview(value: string, pgSetting: Setting | null, cPage: ColorComponent, cLink: ColorComponent, cAcc: ColorComponent, cPen: ColorComponent, patDropdown: DropdownComponent | null) {
+    private updatePreview(value: string, pgSetting: Setting | null, cPage: ColorComponent, cLink: ColorComponent, cAcc: ColorComponent, cPen: ColorComponent, patDropdown: DropdownComponent | null, patScaleSlider: SliderComponent | null) {
         if (value === "custom") {
             if (pgSetting) {
                 pgSetting.nameEl.innerText = "Custom theme colors";
@@ -273,6 +303,10 @@ export class ThemeModal extends Modal {
             if (cAcc !== null) cAcc.setValue(this.customAccentColor);
             if (cPen !== null) cPen.setValue(this.customPenColor);
             if (patDropdown) patDropdown.setDisabled(false);
+            if (patScaleSlider) {
+                patScaleSlider.setValue(this.customPatternScale);
+                patScaleSlider.setDisabled(false);
+            }
         } else {
             const theme = this.plugin.settings.themes.find(t => t.id === value);
             if (theme && pgSetting) {
@@ -291,6 +325,15 @@ export class ThemeModal extends Modal {
                         patDropdown.setDisabled(false);
                     }
                 }
+                if (patScaleSlider) {
+                    if (theme.patternScale !== undefined) {
+                        patScaleSlider.setValue(theme.patternScale);
+                        patScaleSlider.setDisabled(true);
+                    } else {
+                        patScaleSlider.setValue(this.customPatternScale);
+                        patScaleSlider.setDisabled(false);
+                    }
+                }
             }
         }
     }
@@ -300,6 +343,7 @@ export class ThemeModal extends Modal {
         let acc = this.customAccentColor, pen = this.customPenColor;
         let pat = this.customPagePattern;
         let patternCol = this.customPatternColor;
+        let patScale = this.customPatternScale;
         let gridCol = "";
 
         let themeName = "Custom Colors";
@@ -312,6 +356,7 @@ export class ThemeModal extends Modal {
                 if (theme.pagePattern) pat = theme.pagePattern;
                 if (theme.patternColor) patternCol = patternCol || theme.patternColor;
                 if (theme.gridColor) gridCol = theme.gridColor;
+                if (theme.patternScale !== undefined) patScale = theme.patternScale;
             }
         }
 
@@ -320,13 +365,14 @@ export class ThemeModal extends Modal {
             if (activeFile) {
                 await this.app.fileManager.processFrontMatter(activeFile, (frontmatter: Record<string, unknown>) => {
                     // Delete old properties first to help with cleanup/ordering
-                    const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'pattern-color', 'theme-images'];
+                    const keysToDelete = ['page-color', 'link-color', 'accent-color', 'pen-color', 'grid-color', 'theme-id', 'theme-name', 'page-pattern', 'pattern-color', 'pattern-scale', 'theme-images'];
                     keysToDelete.forEach(k => delete frontmatter[k]);
 
                     // Set properties in desired order: 1. theme-name, 2. page-pattern
                     frontmatter['theme-name'] = themeName;
                     frontmatter['page-pattern'] = pat;
                     if (patternCol) frontmatter['pattern-color'] = patternCol;
+                    if (pat !== "none" && patScale !== 1.0) frontmatter['pattern-scale'] = patScale;
 
                     // If custom, we still need the colors to function
                     if (this.selectedThemeId === "custom") {
@@ -351,6 +397,7 @@ export class ThemeModal extends Modal {
             fileContent += `theme-name: "${themeName}"\n`;
             fileContent += `page-pattern: "${pat}"\n`;
             if (patternCol) fileContent += `pattern-color: "${patternCol}"\n`;
+            if (pat !== "none" && patScale !== 1.0) fileContent += `pattern-scale: ${patScale}\n`;
             
             if (this.selectedThemeId === "custom") {
                 fileContent += `page-color: "${pg}"\nlink-color: "${lnk}"\naccent-color: "${acc}"\npen-color: "${pen}"\n`;

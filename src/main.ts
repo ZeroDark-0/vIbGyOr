@@ -104,6 +104,7 @@ export default class VibgyorPlugin extends Plugin {
 				view.containerEl.style.removeProperty('--note-grid-color');
 				view.containerEl.style.removeProperty('--img-recolor-filter');
 				view.containerEl.style.removeProperty('--dynamic-svg');
+				view.containerEl.style.removeProperty('--note-pattern-scale');
 				view.containerEl.classList.remove('custom-note-theme',
 					'pattern-lined', 'pattern-dotted', 'pattern-grid',
 					'pattern-cornell', 'pattern-blueprint', 'pattern-woven',
@@ -148,7 +149,7 @@ export default class VibgyorPlugin extends Plugin {
 		this.registerDomEvent(activeDocument, 'scroll', () => {
 			if (currentImg && toggleBtn.classList.contains('is-visible')) {
 				const rect = currentImg.getBoundingClientRect();
-				if (rect.top > window.innerHeight || rect.bottom < 0 || rect.left > window.innerWidth || rect.right < 0) {
+				if (rect.top > activeWindow.innerHeight || rect.bottom < 0 || rect.left > activeWindow.innerWidth || rect.right < 0) {
 					toggleBtn.classList.remove('is-visible');
 					currentImg = null;
 				} else {
@@ -217,6 +218,15 @@ export default class VibgyorPlugin extends Plugin {
 					let gridCol = gs('grid-color');
 					let patCol = gs('pattern-color');
 
+					let patScaleVal = frontmatter['pattern-scale'];
+					let patScale = 1.0;
+					if (typeof patScaleVal === 'number') {
+						patScale = patScaleVal;
+					} else if (typeof patScaleVal === 'string') {
+						const parsed = parseFloat(patScaleVal);
+						if (!isNaN(parsed)) patScale = parsed;
+					}
+
 					const themeId = gs('theme-id');
 					const themeName = gs('theme-name');
 					if (themeId || themeName) {
@@ -232,6 +242,9 @@ export default class VibgyorPlugin extends Plugin {
 							pat = pat || theme.pagePattern;
 							patCol = patCol || theme.patternColor;
 							gridCol = gridCol || theme.gridColor;
+							if (frontmatter['pattern-scale'] === undefined && theme.patternScale !== undefined) {
+								patScale = theme.patternScale;
+							}
 						}
 					}
 
@@ -241,6 +254,7 @@ export default class VibgyorPlugin extends Plugin {
 						view.containerEl.style.setProperty('--note-pattern-color', patCol || pen || 'inherit');
 						view.containerEl.style.setProperty('--note-link-color', lnk || 'var(--text-a)');
 						view.containerEl.style.setProperty('--note-accent-color', acc || 'var(--text-accent)');
+						view.containerEl.style.setProperty('--note-pattern-scale', patScale.toString());
 						if (gridCol) {
 							view.containerEl.style.setProperty('--note-grid-color', gridCol);
 						} else {
@@ -363,6 +377,7 @@ export default class VibgyorPlugin extends Plugin {
 						view.containerEl.style.removeProperty('--note-accent-color');
 						view.containerEl.style.removeProperty('--note-grid-color');
 						view.containerEl.style.removeProperty('--img-recolor-filter');
+						view.containerEl.style.removeProperty('--note-pattern-scale');
 						view.containerEl.classList.remove('custom-note-theme');
 					}
 				}

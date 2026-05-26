@@ -12,6 +12,7 @@ export interface ThemeEntry {
     pagePattern?: string;
     patternColor?: string;
     gridColor?: string;
+    patternScale?: number;
     isPreset?: boolean;
 }
 
