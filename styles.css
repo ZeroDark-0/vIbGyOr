@@ -70,12 +70,14 @@ body .custom-note-theme.custom-note-theme .markdown-rendered a {
 body .custom-note-theme.pattern-lined .markdown-reading-view,
 body .custom-note-theme.pattern-lined .cm-scroller {
     background-image: repeating-linear-gradient(transparent, transparent 29px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 35%, transparent) 30px);
+    background-attachment: local;
 }
 
 body .custom-note-theme.pattern-dotted .markdown-reading-view,
 body .custom-note-theme.pattern-dotted .cm-scroller {
     background-image: radial-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 45%, transparent) 1.5px, transparent 1.5px);
     background-size: 30px 30px;
+    background-attachment: local;
 }
 
 body .custom-note-theme.pattern-grid .markdown-reading-view,
@@ -84,6 +86,7 @@ body .custom-note-theme.pattern-grid .cm-scroller {
         linear-gradient(color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px),
         linear-gradient(90deg, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 25%, transparent) 1px, transparent 1px);
     background-size: 30px 30px;
+    background-attachment: local;
 }
 
 /* 1. Cornell (Lines + Margin) */
