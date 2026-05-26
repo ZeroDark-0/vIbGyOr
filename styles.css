@@ -368,6 +368,6 @@ body .custom-note-theme.custom-note-theme img[data-original-mode="true"] {
 }
 
 /* Hide Vibgyor pattern-scale from Obsidian's Metadata/Properties view */
-.metadata-property[data-property-key="pattern-scale"] {
-    display: none !important;
+body .metadata-property[data-property-key="pattern-scale"] {
+    display: none;
 }
