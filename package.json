@@ -1,7 +1,7 @@
 {
 	"name": "vibgyor",
-	"version": "1.0.0",
-	"description": "Customize your Obsidian notes with unique colors and patterns.",
+	"version": "1.0.2",
+	"description": "Customize your Obsidian notes with custom color palettes and built-in background patterns.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {

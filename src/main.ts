@@ -114,7 +114,7 @@ export default class VibgyorPlugin extends Plugin {
 	}
 
 	setupImageToggle() {
-		this.toggleBtn = activeDocument.createElement('div');
+		this.toggleBtn = createDiv();
 		const toggleBtn = this.toggleBtn;
 		toggleBtn.classList.add('vibgyor-img-toggle-btn');
 		setIcon(toggleBtn, 'arrow-up-down');
@@ -195,7 +195,7 @@ export default class VibgyorPlugin extends Plugin {
 
 	applyThemeToLeaf(file: TFile) {
 		// Wait a brief moment to ensure the DOM is ready for styles
-		window.setTimeout(() => {
+		activeWindow.setTimeout(() => {
 			const cache = this.app.metadataCache.getFileCache(file);
 			const frontmatter = (cache?.frontmatter ?? {}) as Record<string, unknown>;
 			const gs = (key: string) => this.getFrontmatterString(frontmatter, key);
