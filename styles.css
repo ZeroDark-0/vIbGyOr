@@ -113,6 +113,7 @@ body .custom-note-theme.pattern-woven .cm-scroller {
     background-image: 
         repeating-linear-gradient(45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px),
         repeating-linear-gradient(-45deg, transparent, transparent 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 10px, color-mix(in srgb, var(--note-pattern-color, var(--note-pen-color)) 15%, transparent) 11px);
+    background-size: 15.56px 15.56px;
     background-attachment: local;
 }
 
