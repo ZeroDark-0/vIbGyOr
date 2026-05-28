@@ -5,9 +5,7 @@ After each update, you'll see these release notes so you know what's new (you ca
 I build this plugin as a passion project -> the idea that every note can have its own personality through colors and patterns is what drives vIbGyOr forward. If you run into bugs or have ideas, reach out on [GitHub Issues](https://github.com/ZeroDark-0/vIbGyOr/issues) or [Discord](https://discordapp.com/users/659447909208686632). If you find it valuable, say THANK YOU or...
 
 <div align="center">
-
-[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-black.png)](https://www.buymeacoffee.com/ZeroDark)
-
+  <a href="https://www.buymeacoffee.com/ZeroDark"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png" alt="Buy Me a Coffee" width="180" /></a>
 </div>
 
 ---
