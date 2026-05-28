@@ -6,7 +6,7 @@ I build this plugin as a passion project -> the idea that every note can have it
 
 <div align="center">
 
-[![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=ZeroDark&button_colour=1a1a1a&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00)](https://www.buymeacoffee.com/ZeroDark)
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-black.png)](https://www.buymeacoffee.com/ZeroDark)
 
 </div>
 
