@@ -17,6 +17,8 @@ Give each note its own personality ->  apply custom page colors, text colors, li
 
 - **Per-note theming :** Set unique background, text, link, and accent colors for individual notes
 - **Background patterns :** Apply textures like Grid, Blueprint, Cosmos, Starfield, Zen Waves, and more
+- **Pattern color customization :** Independently color background patterns, decoupled from the text color
+- **Pattern scale control :** Instantly adjust pattern size/density using a slider in the theme modal
 - **Image color matching :** Automatically tints transparent-background images to match your note's pen color, with a one-click toggle to view originals
 - **10 built-in presets :** Ready-to-use themes including Dark Mode, Vampire, Nord Dark, Neon Noir, and more
 - **Custom palettes :** Create and save your own reusable color combinations
@@ -149,6 +151,8 @@ pen-color: "#ffffff"            # Text color (custom colors only)
 link-color: "#3366cc"           # Link color (custom colors only)
 accent-color: "#ff9900"         # Headings & accent (custom colors only)
 grid-color: "#333333"           # Pattern grid color (optional)
+pattern-color: "#ffd700"        # Independent background pattern color (optional)
+pattern-scale: 1.5              # Scale/density multiplier of the pattern (optional)
 ---
 ```
 

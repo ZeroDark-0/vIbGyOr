@@ -19,10 +19,14 @@ export interface ThemeEntry {
 export interface VibgyorSettings {
     themes: ThemeEntry[];
     originalImages: string[];
+    lastSeenVersion: string;
+    showReleaseNotes: boolean;
 }
 
 export const DEFAULT_SETTINGS: VibgyorSettings = {
     originalImages: [],
+    lastSeenVersion: '',
+    showReleaseNotes: true,
     themes: [
         { id: "default-dark", name: "Dark Mode Preset", category: "custom", pageColor: "#202020", linkColor: "#5588ff", accentColor: "#ff9900", penColor: "#ffffff", isPreset: true },
         { id: "default-light", name: "Light Mode Preset", category: "custom", pageColor: "#ffffff", linkColor: "#4f46e5", accentColor: "#ff9900", penColor: "#000000", isPreset: true },
@@ -49,11 +53,21 @@ export class VibgyorSettingTab extends PluginSettingTab {
         const {containerEl} = this;
         containerEl.empty();
 
-        // ── Header ──
+        // ── General Settings ──
         new Setting(containerEl)
-            .setName('Theme presets')
-            .setHeading()
-            .setDesc('Manage note theme presets organized by category.');
+            .setName('General settings')
+            .setHeading();
+
+        new Setting(containerEl)
+            .setName('Show release notes on update')
+            .setDesc("Show a popup detailing what's new when the plugin updates.")
+            .addToggle(toggle => toggle
+                .setValue(this.plugin.settings.showReleaseNotes)
+                .onChange(async (value) => {
+                    this.plugin.settings.showReleaseNotes = value;
+                    await this.plugin.saveSettings();
+                }));
+
 
         // ── Custom palettes section ──
         new Setting(containerEl)

@@ -1,6 +1,7 @@
 import {Plugin, TFile, Notice, MarkdownView, setIcon} from 'obsidian';
 import {DEFAULT_SETTINGS, VibgyorSettings, VibgyorSettingTab} from "./settings";
 import {ThemeModal} from "./ThemeModal";
+import {ReleaseNotesModal} from "./ReleaseNotesModal";
 
 export default class VibgyorPlugin extends Plugin {
 	settings: VibgyorSettings;
@@ -82,6 +83,9 @@ export default class VibgyorPlugin extends Plugin {
 		});
 
 		this.setupImageToggle();
+
+		// Show release notes modal on version update
+		this.checkForUpdate();
 	}
 
 	onunload() {
@@ -113,6 +117,21 @@ export default class VibgyorPlugin extends Plugin {
 					'pattern-checkerboard');
 			}
 		});
+	}
+
+	/**
+	 * Compare saved version with current manifest version.
+	 * If different, show release notes and save the new version.
+	 */
+	private async checkForUpdate() {
+		const currentVersion = this.manifest.version;
+		if (this.settings.lastSeenVersion !== currentVersion) {
+			if (this.settings.showReleaseNotes) {
+				new ReleaseNotesModal(this.app, currentVersion).open();
+			}
+			this.settings.lastSeenVersion = currentVersion;
+			await this.saveSettings();
+		}
 	}
 
 	setupImageToggle() {
