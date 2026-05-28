@@ -243,7 +243,7 @@ export class ThemeModal extends Modal {
                 // Pattern color picker — only show when a pattern is selected
                 if (this.customPagePattern && this.customPagePattern !== "none") {
                     new Setting(containerEl).setName("Pattern color")
-                        .setDesc("Override the pattern color. Leave empty to use pen color.")
+                        .setDesc("Override the pattern color. Leave empty to use default color.")
                         .addColorPicker(c => {
                             c.setValue(this.customPatternColor || this.customPenColor);
                             c.onChange(v => this.customPatternColor = v);
