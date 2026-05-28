@@ -386,7 +386,17 @@ body .metadata-property[data-property-key="pattern-scale"] {
 .vibgyor-release-notes-content {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 0 4px 16px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.vibgyor-release-notes-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 8px 0;
 }
 
 .vibgyor-release-notes-content h1 {
