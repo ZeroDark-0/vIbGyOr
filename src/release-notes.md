@@ -16,7 +16,13 @@ I build this plugin as a passion project -> the idea that every note can have it
 
 ### ✨ New Features
 - **Pattern Color Customization:** Background patterns now have their own independent color! Previously, patterns always inherited the pen (text) color. Now you can set a completely separate `pattern-color` via frontmatter or the theme modal, giving you full creative control -> for example, a dark page with white text but subtle gold grid lines
+
+  ![Pattern color picker](https://raw.githubusercontent.com/ZeroDark-0/vIbGyOr/beta/assets/demo-pattern-color-picker.gif)
+
 - **Pattern Scale Slider:** A new slider in the theme modal lets you adjust the size and density of any background pattern in real-time. Go from tight fine grids to large spacious ones with a simple drag. The scale value is saved per-note via the `pattern-scale` frontmatter property
+
+  ![Pattern scaling](https://raw.githubusercontent.com/ZeroDark-0/vIbGyOr/beta/assets/demo-pattern-scaling.gif)
+
 - **Release Notes Modal:** You're looking at it! After every update, vIbGyOr will show you what changed so you never miss a new feature
 
 ### 🐛 Fixes
