@@ -53,9 +53,9 @@ export class VibgyorSettingTab extends PluginSettingTab {
         const {containerEl} = this;
         containerEl.empty();
 
-        // ── General Settings ──
+        // ── Preferences ──
         new Setting(containerEl)
-            .setName('General settings')
+            .setName('Preferences')
             .setHeading();
 
         new Setting(containerEl)

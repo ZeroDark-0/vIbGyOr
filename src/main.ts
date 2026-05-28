@@ -85,7 +85,7 @@ export default class VibgyorPlugin extends Plugin {
 		this.setupImageToggle();
 
 		// Show release notes modal on version update
-		this.checkForUpdate();
+		await this.checkForUpdate();
 	}
 
 	onunload() {
